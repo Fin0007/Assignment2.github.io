@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绿野仙踪 · 45秒动画短片 | 制作手记</title>
+<style>
+:root{
+  --paper:#f7f1e4;
+  --paper-2:#fffdf8;
+  --ink:#3d3226;
+  --ink-soft:#7a6b57;
+  --gold:#c9a227;
+  --gold-l:#e8c766;
+  --green:#7ba05b;
+  --rose:#c9737a;
+  --sky:#8fb8c9;
+  --violet:#9b8bb4;
+  --shadow:0 10px 40px rgba(61,50,38,.13);
+  --shadow-s:0 4px 16px rgba(61,50,38,.10);
+  --r:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",Georgia,serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* ---------- paper texture ---------- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+::selection{background:var(--gold-l);color:var(--ink)}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:900;
+  background:rgba(247,241,228,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(61,50,38,.09);
+}
+.nav-in{max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.16)}
+.nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{
+  color:var(--ink-soft);text-decoration:none;font-size:14.5px;padding:6px 13px;border-radius:999px;
+  transition:.25s;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+}
+.nav-links a:hover{background:rgba(201,162,39,.14);color:var(--ink)}
+.nav-links a.on{background:var(--ink);color:var(--paper-2)}
+
+/* ---------- hero ---------- */
+header{position:relative;padding:76px 0 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;opacity:.5}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,241,228,.5) 0%,rgba(247,241,228,.86) 62%,var(--paper) 100%)}
+.hero-in{position:relative;z-index:2;text-align:center;max-width:760px;margin:0 auto}
+.tag{
+  display:inline-block;font-family:"PingFang SC",sans-serif;font-size:12.5px;letter-spacing:2.5px;
+  color:var(--gold);border:1px solid rgba(201,162,39,.45);padding:5px 16px;border-radius:999px;
+  background:rgba(255,253,248,.7);text-transform:uppercase;
+}
+h1{
+  font-size:clamp(42px,7.4vw,76px);line-height:1.14;margin:22px 0 8px;letter-spacing:2px;font-weight:700;
+}
+h1 .sub{display:block;font-size:.36em;letter-spacing:7px;color:var(--ink-soft);font-weight:400;margin-top:14px}
+.lede{font-size:clamp(15px,1.9vw,18.5px);color:var(--ink-soft);margin:20px auto 0;max-width:600px}
+.badges{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:26px;font-family:"PingFang SC",sans-serif}
+.badge{
+  background:var(--paper-2);border:1px solid rgba(61,50,38,.13);border-radius:999px;
+  padding:6px 15px;font-size:13px;color:var(--ink-soft);box-shadow:var(--shadow-s);
+}
+.badge b{color:var(--ink);font-weight:600}
+
+/* ---------- section ---------- */
+section{padding:76px 0;position:relative}
+.sec-head{text-align:center;margin-bottom:44px}
+.sec-kicker{
+  font-family:"PingFang SC",sans-serif;font-size:12.5px;letter-spacing:3.5px;color:var(--gold);
+  text-transform:uppercase;margin-bottom:12px;
+}
+h2{font-size:clamp(27px,4vw,40px);letter-spacing:1.5px;line-height:1.3}
+.sec-desc{color:var(--ink-soft);margin-top:14px;max-width:620px;margin-inline:auto;font-size:15.5px}
+
+/* ---------- player ---------- */
+.player-card{
+  background:var(--paper-2);border-radius:var(--r);box-shadow:var(--shadow);
+  border:1px solid rgba(61,50,38,.1);overflow:hidden;
+}
+.player-box{position:relative;background:#000;aspect-ratio:16/9}
+.player-box video{width:100%;height:100%;display:block;object-fit:contain}
+.ctrls{display:flex;align-items:center;gap:14px;padding:14px 18px;flex-wrap:wrap}
+.btn-play{
+  width:46px;height:46px;flex:none;border-radius:50%;border:none;cursor:pointer;
+  background:var(--ink);color:var(--paper-2);display:grid;place-items:center;transition:.22s;
+}
+.btn-play:hover{background:var(--gold);transform:scale(1.06)}
+.btn-play svg{width:19px;height:19px;fill:currentColor}
+.bar{flex:1;min-width:150px;height:7px;background:rgba(61,50,38,.13);border-radius:99px;cursor:pointer;position:relative}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-l),var(--gold));border-radius:99px;width:0;transition:width .1s linear}
+.bar-dot{
+  position:absolute;top:50%;width:14px;height:14px;background:var(--paper-2);border:3px solid var(--gold);
+  border-radius:50%;top:-4px;transform:translateY(-50%);left:0;transition:left .1s linear;pointer-events:none;
+  box-shadow:0 1px 6px rgba(0,0,0,.25);
+}
+.time{font-family:"SF Mono",Consolas,monospace;font-size:13.5px;color:var(--ink-soft);min-width:88px;text-align:right}
+.ctrl-group{display:flex;gap:7px;align-items:center}
+.mini{
+  border:1px solid rgba(61,50,38,.16);background:transparent;border-radius:9px;cursor:pointer;
+  padding:7px 12px;font-size:12.5px;color:var(--ink-soft);font-family:"PingFang SC",sans-serif;transition:.2s;white-space:nowrap;
+}
+.mini:hover{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+
+/* caption bar under player */
+.cap-strip{
+  padding:15px 20px;text-align:center;border-top:1px dashed rgba(61,50,38,.14);
+  font-size:17px;color:var(--ink);min-height:56px;display:grid;place-items:center;letter-spacing:1px;
+}
+.cap-strip .ph{color:rgba(122,107,87,.5);font-size:14.5px}
+
+/* ---------- shot rail ---------- */
+.rail-h{display:flex;align-items:center;justify-content:space-between;margin:34px 0 16px;flex-wrap:wrap;gap:12px}
+.rail-h h3{font-size:20px;letter-spacing:1px}
+.rail-h span{font-size:13.5px;color:var(--ink-soft);font-family:"PingFang SC",sans-serif}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:14px}
+.shot{
+  position:relative;border-radius:13px;overflow:hidden;cursor:pointer;background:var(--ink);
+  border:2px solid transparent;transition:.26s;box-shadow:var(--shadow-s);
+}
+.shot img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:.4s;opacity:.9}
+.shot:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.shot:hover img{opacity:1;transform:scale(1.05)}
+.shot.act{border-color:var(--gold);transform:translateY(-4px)}
+.shot.act img{opacity:1}
+.shot .n{
+  position:absolute;top:8px;left:8px;background:rgba(0,0,0,.62);color:#fff;border-radius:7px;
+  padding:2px 8px;font-size:11.5px;font-family:"SF Mono",monospace;backdrop-filter:blur(4px);
+}
+.shot .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:16px 10px 8px;
+  background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font-size:12.5px;line-height:1.5;
+}
+.shot .cap .t{font-family:"SF Mono",monospace;font-size:11px;opacity:.8}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.tab{
+  padding:9px 20px;border-radius:999px;border:1px solid rgba(61,50,38,.18);cursor:pointer;
+  background:var(--paper-2);font-size:14.5px;color:var(--ink-soft);transition:.24s;
+  font-family:"PingFang SC",sans-serif;
+}
+.tab:hover{border-color:var(--gold);color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.pane{display:none;animation:fade .45s ease}
+.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ---------- cards ---------- */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:20px}
+.card{
+  background:var(--paper-2);border-radius:var(--r);padding:26px 24px;border:1px solid rgba(61,50,38,.1);
+  box-shadow:var(--shadow-s);transition:.3s;position:relative;overflow:hidden;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card::after{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transition:.35s;transform-origin:left}
+.card:hover::after{transform:scaleX(1)}
+.card .ic{font-size:30px;margin-bottom:13px;display:block}
+.card h4{font-size:18.5px;margin-bottom:9px;letter-spacing:.5px}
+.card p{font-size:14.5px;color:var(--ink-soft);line-height:1.85}
+
+/* character cards */
+.chars{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:18px}
+.ch{
+  border-radius:var(--r);overflow:hidden;background:var(--paper-2);border:1px solid rgba(61,50,38,.1);
+  box-shadow:var(--shadow-s);transition:.34s;cursor:pointer;position:relative;
+}
+.ch:hover{transform:translateY(-6px) rotate(-.7deg);box-shadow:var(--shadow)}
+.ch .pic{height:172px;overflow:hidden;position:relative}
+.ch .pic img{width:100%;height:100%;object-fit:cover;object-position:center 32%;transition:.5s}
+.ch:hover .pic img{transform:scale(1.07)}
+.ch .info{padding:17px 19px 20px}
+.ch .nm{font-size:18px;font-weight:700;letter-spacing:.6px}
+.ch .en{font-family:"SF Mono",monospace;font-size:11.5px;color:var(--gold);letter-spacing:1.5px;margin-top:2px}
+.ch .wish{
+  font-size:13.5px;color:var(--ink-soft);margin-top:11px;padding-top:11px;
+  border-top:1px dashed rgba(61,50,38,.16);line-height:1.75;
+}
+.ch .wish b{color:var(--rose);font-weight:600}
+
+/* ---------- process timeline ---------- */
+.flow{position:relative;padding-left:38px}
+.flow::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),rgba(201,162,39,.15))}
+.step{position:relative;margin-bottom:30px}
+.step::before{
+  content:attr(data-n);position:absolute;left:-38px;top:2px;width:24px;height:24px;border-radius:50%;
+  background:var(--paper-2);border:2px solid var(--gold);color:var(--gold);
+  display:grid;place-items:center;font-size:12px;font-family:"SF Mono",monospace;font-weight:700;
+}
+.step h4{font-size:17.5px;margin-bottom:7px;letter-spacing:.5px}
+.step p{font-size:14.5px;color:var(--ink-soft);line-height:1.85}
+.step .pill{
+  display:inline-block;margin-top:9px;font-family:"PingFang SC",sans-serif;font-size:12px;
+  background:rgba(123,160,91,.15);color:#5c7a43;padding:3px 11px;border-radius:999px;
+}
+
+/* ---------- quiz ---------- */
+.quiz{background:linear-gradient(150deg,#fffdf8,#f3ead6);border-radius:26px;padding:44px 34px;border:1px solid rgba(201,162,39,.32);box-shadow:var(--shadow);text-align:center;max-width:680px;margin:0 auto;position:relative;overflow:hidden}
+.quiz::before{content:"✦";position:absolute;font-size:190px;color:rgba(201,162,39,.09);top:-42px;right:-24px;pointer-events:none}
+.quiz h3{font-size:24px;letter-spacing:1px;margin-bottom:9px}
+.quiz .qh{font-size:17px;color:var(--ink-soft);margin-bottom:22px;min-height:28px}
+.opts{display:grid;gap:10px;margin-bottom:18px}
+.opt{
+  background:var(--paper-2);border:2px solid rgba(61,50,38,.13);border-radius:13px;padding:14px 18px;
+  cursor:pointer;text-align:left;font-size:15.5px;transition:.22s;font-family:inherit;color:var(--ink);
+  display:flex;align-items:center;gap:12px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--gold);transform:translateX(5px);background:#fff}
+.opt .k{
+  width:26px;height:26px;flex:none;border-radius:50%;background:rgba(61,50,38,.09);
+  display:grid;place-items:center;font-size:13px;font-family:"SF Mono",monospace;
+}
+.opt.right{border-color:#5c9a4a;background:#f0f8ec}
+.opt.right .k{background:#5c9a4a;color:#fff}
+.opt.wrong{border-color:var(--rose);background:#fdf0f0}
+.opt.wrong .k{background:var(--rose);color:#fff}
+.opt:disabled{cursor:default}
+.fb{font-size:15px;min-height:26px;color:var(--ink-soft);margin-bottom:14px}
+.fb.ok{color:#4d8a3c;font-weight:600}
+.fb.no{color:var(--rose);font-weight:600}
+.btn{
+  background:var(--ink);color:var(--paper-2);border:none;border-radius:999px;padding:11px 30px;
+  font-size:15px;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:.24s;
+}
+.btn:hover{background:var(--gold);transform:translateY(-2px)}
+.score{font-family:"SF Mono",monospace;font-size:13px;color:var(--ink-soft);margin-top:14px}
+
+/* ---------- palette ---------- */
+.pal{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.sw{
+  width:104px;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--paper-2);
+  border:1px solid rgba(61,50,38,.11);box-shadow:var(--shadow-s);transition:.28s;
+}
+.sw:hover{transform:translateY(-6px) rotate(2deg);box-shadow:var(--shadow)}
+.sw .c{height:76px}
+.sw .m{padding:9px 7px;text-align:center}
+.sw .m b{display:block;font-size:13px}
+.sw .m span{font-family:"SF Mono",monospace;font-size:10.5px;color:var(--ink-soft)}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid rgba(61,50,38,.1);padding:46px 0 60px;text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(201,162,39,.07));
+}
+footer p{color:var(--ink-soft);font-size:14.5px}
+footer .q{font-size:19px;color:var(--ink);letter-spacing:2px;margin-bottom:14px}
+
+/* ---------- dandelion float ---------- */
+.seed{position:fixed;z-index:800;pointer-events:none;font-size:15px;opacity:.5;animation:fl 5s linear forwards}
+@keyframes fl{
+  0%{transform:translate(0,0) rotate(0);opacity:0}
+  12%{opacity:.65}
+  100%{transform:translate(var(--dx),var(--dy)) rotate(320deg);opacity:0}
+}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:.75s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:760px){
+  .nav-links{display:none}
+  header{padding:52px 0 40px}
+  .shot .cap{font-size:11px;padding:14px 7px 6px}
+  .shots{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .flow{padding-left:32px}
+  section{padding:56px 0}
+  .cap-strip{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand"><span class="dot"></span>绿野仙踪 · 动画短片</div>
+    <div class="nav-links">
+      <a href="#watch">成片</a>
+      <a href="#story">内容讲解</a>
+      <a href="#chars">角色</a>
+      <a href="#craft">制作思路</a>
+      <a href="#quiz">趣味互动</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-bg"><img src="assets/poster.jpg" alt=""></div>
+  <div class="hero-fade"></div>
+  <div class="hero-in">
+    <span class="tag">AI Animation Short · 2026</span>
+    <h1>绿野仙踪<span class="sub">THE WONDERFUL WIZARD OF OZ</span></h1>
+    <p class="lede">
+      45秒,把一个百年童话重新讲了一遍。<br>
+      龙卷风卷走小屋与女孩,四个心怀遗憾的同伴在花田相遇,<br>
+      最后走回那本摊开的书里——最好的旅途,是遇见更好的自己。
+    </p>
+    <div class="badges">
+      <span class="badge">时长 <b>45s</b></span>
+      <span class="badge">分镜 <b>10 镜</b></span>
+      <span class="badge">规格 <b>1920×1080</b></span>
+      <span class="badge">帧率 <b>30fps</b></span>
+      <span class="badge">风格 <b>水彩绘本</b></span>
+      <span class="badge">配乐 <b>原创 BGM</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 成片 ================= -->
+<section id="watch">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker">The Film</div>
+      <h2>成品短片</h2>
+      <p class="sec-desc">点击分镜可跳转到对应时间,字幕随播放同步高亮。</p>
+    </div>
+
+    <div class="player-card rv">
+      <div class="player-box">
+        <video id="v" preload="metadata" playsinline poster="assets/poster.jpg">
+          <source src="assets/video_720.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="ctrl-group" style="padding:0 18px">
+        <div class="bar" id="bar"><div class="bar-fill" id="fill"></div><div class="bar-dot" id="dot"></div></div>
+      </div>
+      <div class="ctrls">
+        <button class="btn-play" id="play" aria-label="播放">
+          <svg id="pico" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="time"><span id="cur">0:00</span> / 0:45</div>
+        <button class="mini" id="mute">🔊 声音</button>
+        <button class="mini" id="loop">🔁 循环</button>
+        <button class="mini" id="fs">⛶ 全屏</button>
+      </div>
+      <div class="cap-strip"><span id="cap" class="ph">点击播放,这里会同步显示片中的旁白字幕…</span></div>
+    </div>
+
+    <div class="rail-h">
+      <h3>分镜一览</h3>
+      <span>10 个镜头 · 点击任意镜头跳转播放</span>
+    </div>
+    <div class="shots" id="rail"></div>
+  </div>
+</section>
+
+<!-- ================= 内容讲解 ================= -->
+<section id="story" style="background:linear-gradient(180deg,transparent,rgba(255,253,248,.7),transparent)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker">Story Breakdown</div>
+      <h2>内容讲解</h2>
+      <p class="sec-desc">原著是一部长篇冒险,45秒讲不了。所以我们只留了一条主线:<b>被卷走 → 相遇 → 同行 → 归来</b>。</p>
+    </div>
+
+    <div class="tabs rv" id="tabs">
+      <div class="tab on" data-t="0">四幕结构</div>
+      <div class="tab" data-t="1">改编取舍</div>
+      <div class="tab" data-t="2">视听语言</div>
+    </div>
+
+    <div class="pane on" data-p="0">
+      <div class="grid3">
+        <div class="card rv"><span class="ic">🌪️</span><h4>第一幕 · 意外</h4><p>开场即是全片唯一的"意外":龙卷风把整座木屋连人带狗卷上天空,画面在旋转中失衡。原著里平静的乡村生活被彻底打碎——<b>冒险不是被选择的,是被卷进来的。</b></p></div>
+        <div class="card rv"><span class="ic">🌾</span><h4>第二幕 · 相遇</h4><p>女孩落在花田与草屋之间,先后遇见稻草人、铁皮人和狮子。三次相遇用了几乎相同的构图:人物并排望向画外,唯一的区别是背景色。<b>重复的构图,累积起"同行"的意义。</b></p></div>
+        <div class="card rv"><span class="ic">🏰</span><h4>第三幕 · 同行</h4><p>四人背影走向绿野尽头的城堡,字幕"结伴而行,彼此成就"。这里镜头第一次从"面对"切到"背对"——<b>观众被邀请到他们身后,一起走。</b></p></div>
+        <div class="card rv"><span class="ic">📖</span><h4>第四幕 · 归来</h4><p>终点不是城墙,而是一本摊开的书。金色的烟云把四人重新收进书页,首尾呼应。<b>故事讲完了,而书还没合上——童话仍在继续。</b></p></div>
+      </div>
+    </div>
+
+    <div class="pane" data-p="1">
+      <div class="grid3">
+        <div class="card rv"><span class="ic">✂️</span><h4>删掉了什么</h4><p>女巫、胆小的狮子内心戏、翡翠城里的骗术、国王的女儿,全部舍弃。45秒的体量里,任何支线都会稀释主线。我们保留了"想回家"这一句话,就足以让情感落地。</p></div>
+        <div class="card rv"><span class="ic">🔁</span><h4>为什么改写开场</h4><p>原著是多姆被 Gentle Wind 吹走,而我们让她连房子一起被龙卷风带走。<b>视觉冲击更强</b>——旋转的木屋本身就是转场,不需要额外解释。</p></div>
+        <div class="card rv"><span class="ic">💫</span><h4>加了什么</h4><p>原著中三人是被 Dorothy 拉上路的。改写版把他们都处理成<b>同样心怀遗憾的人</b>,字幕写"四个心怀遗憾的追梦人"。孤独者遇孤独者,才是"彼此成就"的前提。</p></div>
+        <div class="card rv"><span class="ic">🔚</span><h4>结局的翻转</h4><p>原著结局是回到Kansas 家门口,带着"我也能"的感悟。改写版的落点更抽象:<b>场景缩进书里</b>,暗示旅程本身就是目的,不需要真正抵达某个地方。</p></div>
+      </div>
+    </div>
+
+    <div class="pane" data-p="2">
+      <div class="grid3">
+        <div class="card rv"><span class="ic">🎨</span><h4>水彩质感</h4><p>全片统一在<b>水彩绘本</b>质感上:纸纹底、颜料边缘的晕染、饱和度偏低但通透。转场时用"颜料流动"衔接,而不是硬切。</p></div>
+        <div class="card rv"><span class="ic">🎼</span><h4>音乐结构</h4><p>BGM 走的是五声音阶的弦乐主题,情绪曲线为:<b>紧张(龙卷风)→ 明亮(相遇)→ 展开(同行)→ 温柔收束(书页)</b>。片尾留了 2 秒余韵,让情绪落地。</p></div>
+        <div class="card rv"><span class="ic">🔤</span><h4>字幕策略</h4><p>全片只有 4 句字幕,每句不超过 9 个字,居中偏下,带描边保证在任何画面上都可读。<b>少即是多</b>——留白让画面自己说话。</p></div>
+        <div class="card rv"><span class="ic">🖼️</span><h4>构图法则</h4><p>大量使用<b>中心对称</b>与<b>前景遮挡</b>(花草、蒲公英)制造层次。人物多置于画面下三分之一,天空留给云和城堡,强化"渺小但坚定"的叙事感。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 角色 ================= -->
+<section id="chars">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker">Characters</div>
+      <h2>四个心怀遗憾的同行者</h2>
+      <p class="sec-desc">他们带着各自的缺口出发,在路上互相补齐。点一点,看看各自的遗憾。</p>
+    </div>
+    <div class="chars">
+      <div class="ch rv" data-w="多姆想要的是回家。可当龙卷风把她和房子一起卷走,她连"想要什么"都来不及想清楚,就已经上路了。她是四人里唯一还没开始寻找的人——因为她还没意识到自己丢了东西。">
+        <div class="pic"><img src="assets/shot_03.jpg" alt="多姆"></div>
+        <div class="info"><div class="nm">多姆 · 小女孩</div><div class="en">DOROTHY</div>
+        <div class="wish">心愿:<b>回家</b></div></div>
+      </div>
+      <div class="ch rv" data-w="稻草人想要一颗心脏。他挂在田里太久,以为自己的恐惧和笨拙都源于那缺失的一块。多数时候他并不需要心脏,他只是以为自己需要。">
+        <div class="pic"><img src="assets/shot_04.jpg" alt="稻草人"></div>
+        <div class="info"><div class="nm">稻草人</div><div class="en">SCARECROW</div>
+        <div class="wish">心愿:<b>一颗会跳动的心</b></div></div>
+      </div>
+      <div class="ch rv" data-w="铁皮人想要一颗心。造他的工匠把他的心取走,于是他成了会说话的铁。他握着斧头的样子很凶,但他唯一想做的事,是学会在乎别人。">
+        <div class="pic"><img src="assets/shot_05.jpg" alt="铁皮人"></div>
+        <div class="info"><div class="nm">铁皮人</div><div class="en">TIN MAN</div>
+        <div class="wish">心愿:<b>一颗温柔的心</b></div></div>
+      </div>
+      <div class="ch rv" data-w="狮子想要勇气。他有一身强壮的身体和一颗胆小的肠子,所以总是被自己的吼声骗到。他在花田里低下头的样子,和片尾并肩的样子完全不同。">
+        <div class="pic"><img src="assets/shot_06.jpg" alt="狮子"></div>
+        <div class="info"><div class="nm">狮子</div><div class="en">LION</div>
+        <div class="wish">心愿:<b>一点勇气</b></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 制作思路 ================= -->
+<section id="craft" style="background:linear-gradient(180deg,transparent,rgba(255,253,248,.75),transparent)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker">Behind the Scenes</div>
+      <h2>制作过程思路</h2>
+      <p class="sec-desc">从一句台词到 45 秒成片,拆成 6 个可复用的步骤。</p>
+    </div>
+
+    <div class="grid3 rv" style="margin-bottom:44px">
+      <div class="card"><span class="ic">🎬</span><h4>分镜先行</h4><p>先画 10 张关键帧,把节奏定死,再谈动效。水彩风的好处是<b>静帧本身就成立</b>,所以每一格都能直接当海报用。</p></div>
+      <div class="card"><span class="ic">🎙️</span><h4>音频先行</h4><p>配音和 BGM 先定稿,再按 45 秒卡时间轴。<b>声音决定节奏,画面服从节奏</b>,反过来做一定返工。</p></div>
+      <div class="card"><span class="ic">🌈</span><h4>风格锚定</h4><p>第一帧定调:纸纹、水彩边缘、低饱和暖色。后续 9 帧全部照着它生成,<b>风格漂移是最贵的返工</b>。</p></div>
+    </div>
+
+    <div class="flow">
+      <div class="step rv" data-n="1"><h4>读原著,做取舍</h4><p>通读《绿野仙踪》,列出所有情节点,只保留能服务"遇见自己"这条线的部分。删掉女巫与骗术,把体量全部让给情感。</p><span class="pill">原著 → 核心线</span></div>
+      <div class="step rv" data-n="2"><h4>写 4 句字幕</h4><p>「一场意外,开启冒险」「四个心怀遗憾的追梦人」「结伴而行,彼此成就」「你想要的,一直都在自己身上」——用最少文字定下全片情绪。</p><span class="pill">文案 → 情绪锚</span></div>
+      <div class="step rv" data-n="3"><h4>绘分镜,锁构图</h4><p>10 格关键帧,每格标注时长。三次"相遇"刻意复用同一构图,片尾与首帧做书页呼应,形成闭环。</p><span class="pill">10 镜 → 时间轴</span></div>
+      <div class="step rv" data-n="4"><h4>生成画面并统一风格</h4><p>逐镜生成后做一次风格校正:统一色温、笔触、纸张底色,尤其是角色造型——铁皮人的爱心和稻草人的补丁是识别锚点,必须一致。</p><span class="pill">风格漂移校正</span></div>
+      <div class="step rv" data-n="5"><h4>加入运镜与转场</h4><p>静态水彩靠运镜产生呼吸感:缓推、缓拉、轻微手持感。转场用颜料流动衔接,全书 10 镜只有 1 次硬切(龙卷风出场)。</p><span class="pill">缓推 / 缓拉 / 颜料转场</span></div>
+      <div class="step rv" data-n="6"><h4>混音,压字幕</h4><p>旁白置顶、BGM 压低 6dB,字幕加 2px 描边。最后检查 4 句字幕的时间点是否落在情绪拐点上。</p><span class="pill">母带 / 字幕描边</span></div>
+    </div>
+
+    <div class="sec-head rv" style="margin-top:56px">
+      <div class="sec-kicker">Color Palette</div>
+      <h2>全片主色</h2>
+      <p class="sec-desc">从成片中提取的色彩,也是这套水彩风格的"身份证"。</p>
+    </div>
+    <div class="pal rv">
+      <div class="sw"><div class="c" style="background:#f7f1e4"></div><div class="m"><b>纸底</b><span>#F7F1E4</span></div></div>
+      <div class="sw"><div class="c" style="background:#7ba05b"></div><div class="m"><b>草绿</b><span>#7BA05B</span></div></div>
+      <div class="sw"><div class="c" style="background:#e8c766"></div><div class="m"><b>暖金</b><span>#E8C766</span></div></div>
+      <div class="sw"><div class="c" style="background:#c9737a"></div><div class="m"><b>砖红</b><span>#C9737A</span></div></div>
+      <div class="sw"><div class="c" style="background:#8fb8c9"></div><div class="m"><b>天青</b><span>#8FB8C9</span></div></div>
+      <div class="sw"><div class="c" style="background:#9b8bb4"></div><div class="m"><b>暮紫</b><span>#9B8BB4</span></div></div>
+      <div class="sw"><div class="c" style="background:#3d3226"></div><div class="m"><b>墨褐</b><span>#3D3226</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 互动 ================= -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker">Play & Learn</div>
+      <h2>趣味互动</h2>
+      <p class="sec-desc">三道题,检验一下你看片有多仔细。</p>
+    </div>
+    <div class="quiz rv">
+      <h3>🎲 童话小测验</h3>
+      <div class="qh" id="qh"></div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb">从第一题开始吧。</div>
+      <button class="btn" id="next">下一题 →</button>
+      <div class="score" id="score"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="q">「 最好的旅途,是遇见更好的自己 」</p>
+    <p>绿野仙踪 · 45 秒动画短片 &nbsp;|&nbsp; 制作手记</p>
+    <p style="font-size:12.5px;opacity:.65;margin-top:9px;font-family:'PingFang SC',sans-serif">水彩绘本风 &nbsp;·&nbsp; 1920×1080 &nbsp;·&nbsp; 30fps &nbsp;·&nbsp; 45s</p>
+  </div>
+</footer>
+
+<script>
+const SHOTS=[
+ {t:0,   n:"01", c:"绿野尽头,城堡与标题",   cap:"经典童话 | 绿野仙踪"},
+ {t:4,   n:"02", c:"龙卷风卷走整座木屋",     cap:"一场意外,开启冒险"},
+ {t:8.5, n:"03", c:"落地:草屋、彩虹与花田",   cap:"一场意外,开启冒险"},
+ {t:13,  n:"04", c:"麦田里遇见稻草人",       cap:"四个心怀遗憾的追梦人"},
+ {t:17.5,n:"05", c:"林中遇铁皮人,心口一颗红心",cap:"四个心怀遗憾的追梦人"},
+ {t:22,  n:"06", c:"狮子低头,四人了然",       cap:"结伴而行,彼此成就"},
+ {t:26,  n:"07", c:"四人同行,背影走向远方",   cap:"结伴而行,彼此成就"},
+ {t:30,  n:"08", c:"绿野尽头,翡翠般的城堡",   cap:"你想要的,一直都在自己身上"},
+ {t:36,  n:"09", c:"城堡前并肩而立",         cap:"你想要的,一直都在自己身上"},
+ {t:40.5,n:"10", c:"旅程缩回一本摊开的书",    cap:"最好的旅途,是遇见更好的自己"}
+];
+
+const v=document.getElementById('v');
+const bar=document.getElementById('bar'),fill=document.getElementById('fill'),dot=document.getElementById('dot');
+const cur=document.getElementById('cur'),play=document.getElementById('play'),pico=document.getElementById('pico');
+const capEl=document.getElementById('cap');
+const ICO='<path d="M8 5v14l11-7z"/>';
+const ICO2='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+const DUR=45;
+
+function fmt(s){const m=Math.floor(s/60);return m+':'+String(Math.floor(s%60)).padStart(2,'0')}
+function seekFrom(e){
+  const r=bar.getBoundingClientRect();
+  const p=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));
+  v.currentTime=p*DUR;
+}
+bar.addEventListener('click',seekFrom);
+let drag=false;
+bar.addEventListener('mousedown',e=>{drag=true;seekFrom(e)});
+document.addEventListener('mousemove',e=>{if(drag)seekFrom(e)});
+document.addEventListener('mouseup',()=>drag=false);
+
+play.addEventListener('click',()=>{
+  if(v.paused){v.play();pico.innerHTML=ICO2}else{v.pause();pico.innerHTML=ICO}
+});
+v.addEventListener('play',()=>pico.innerHTML=ICO2);
+v.addEventListener('pause',()=>pico.innerHTML=ICO);
+v.addEventListener('click',()=>{v.paused?v.play():v.pause()});
+document.getElementById('mute').addEventListener('click',function(){
+  v.muted=!v.muted;this.textContent=v.muted?'🔇 静音':'🔊 声音';
+});
+document.getElementById('loop').addEventListener('click',function(){
+  v.loop=!v.loop;this.style.background=v.loop?'rgba(201,162,39,.22)':'';
+});
+document.getElementById('fs').addEventListener('click',()=>{
+  const box=document.querySelector('.player-box');
+  if(document.fullscreenElement)document.exitFullscreen();
+  else if(box.requestFullscreen)box.requestFullscreen();
+});
+
+/* build shot rail */
+const rail=document.getElementById('rail');
+SHOTS.forEach(s=>{
+  const d=document.createElement('div');
+  d.className='shot';d.dataset.t=s.t;
+  d.innerHTML=`<img src="assets/shot_${s.n}.jpg" alt=""><div class="n">${s.n}</div>
+    <div class="cap"><div class="t">${s.t.toFixed(1)}s</div>${s.c}</div>`;
+  d.onclick=()=>{v.currentTime=s.t;v.play();scrollTo({top:document.getElementById('watch').offsetTop-70,behavior:'smooth'})};
+  rail.appendChild(d);
+});
+const shotEls=[...rail.children];
+
+function sync(){
+  const t=v.currentTime||0;
+  const p=Math.min(1,t/DUR);
+  fill.style.width=(p*100)+'%';dot.style.left=(p*100)+'%';
+  cur.textContent=fmt(t);
+  let active=-1;
+  for(let i=0;i<SHOTS.length;i++){if(t>=SHOTS[i].t)active=i}
+  shotEls.forEach((e,i)=>e.classList.toggle('act',i===active));
+  let txt='';
+  if(t<3)txt='经典童话 | 绿野仙踪';
+  else if(t<12.5)txt='一场意外,开启冒险';
+  else if(t<21)txt='四个心怀遗憾的追梦人';
+  else if(t<29)txt='结伴而行,彼此成就';
+  else if(t<40)txt='你想要的,一直都在自己身上';
+  else txt='最好的旅途,是遇见更好的自己';
+  capEl.textContent=txt;
+}
+v.addEventListener('timeupdate',sync);
+v.addEventListener('loadedmetadata',sync);
+sync();
+
+/* tabs */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
+    t.classList.add('on');
+    document.querySelector('.pane[data-p="'+t.dataset.t+'"]').classList.add('on');
+  };
+});
+
+/* character wish reveal */
+document.querySelectorAll('.ch').forEach(c=>{
+  c.onclick=()=>{
+    if(c.dataset.open)return;
+    c.dataset.open=1;
+    const w=document.createElement('div');
+    w.style.cssText='font-size:13.5px;color:#7a6b57;margin-top:10px;line-height:1.85;border-top:1px dashed rgba(61,50,38,.16);padding-top:10px;animation:fade .4s ease';
+    w.innerHTML=c.dataset.w;
+    c.querySelector('.info').appendChild(w);
+  };
+});
+
+/* quiz */
+const QUIZ=[
+ {q:"片头把多姆和她的木屋一起卷走的,是下面哪一样东西?",o:["龙卷风","巨浪","大雪","外星人飞船"],a:0,
+  e:"龙卷风。原著里多姆是被风带走的,改写版让整座木屋升空,视觉冲击更强,转场也天然成立。"},
+ {q:"三位同伴里,谁的心口画着一颗红色的心?",o:["稻草人","铁皮人","狮子"],a:1,
+  e:"铁皮人。他握着斧头看似凶悍,但他想要的只是一颗能学会在乎别人的心。"},
+ {q:"全片的最后一个镜头,四人走进了什么里面?",o:["城堡的大门","一本摊开的书","一片花海","一条河"],a:1,
+  e:"一本摊开的书。金色烟云把四人收进书页,与首帧的城堡呼应——故事讲完了,书还没合上。"}
+];
+let qi=0,ans=0,locked=false,done=false;
+const qh=document.getElementById('qh'),opts=document.getElementById('opts'),
+      fb=document.getElementById('fb'),next=document.getElementById('next'),
+      sc=document.getElementById('score');
+const KEYS=['A','B','C','D'];
+function render(){
+  const Q=QUIZ[qi];
+  qh.textContent=(qi+1)+'. '+Q.q;
+  opts.innerHTML='';locked=false;
+  fb.textContent='';fb.className='fb';
+  Q.o.forEach((txt,i)=>{
+    const b=document.createElement('button');
+    b.className='opt';b.innerHTML=`<span class="k">${KEYS[i]}</span>${txt}`;
+    b.onclick=()=>{
+      if(locked)return;locked=true;
+      [...opts.children].forEach(x=>x.disabled=true);
+      if(i===Q.a){b.classList.add('right');fb.textContent='✓ '+Q.e;fb.className='fb ok';ans++}
+      else{b.classList.add('wrong');opts.children[Q.a].classList.add('right');
+        fb.textContent='✗ 正确答案：'+KEYS[Q.a]+'。'+Q.e;fb.className='fb no'}
+      next.textContent=(qi===QUIZ.length-1)?'查看结果 ✓':'下一题 →';
+      sc.textContent='已答 '+qi+'/3 · 答对 '+ans+' 题';
+    };
+    opts.appendChild(b);
+  });
+  next.textContent=(qi===QUIZ.length-1)?'查看结果 ✓':'下一题 →';
+  sc.textContent='已答 '+qi+'/3 · 答对 '+ans+' 题';
+}
+next.onclick=()=>{
+  if(done){ // restart
+    qi=0;ans=0;done=false;
+    qh.textContent='';render();
+    return;
+  }
+  if(!locked){fb.textContent='先选一个答案吧~';fb.className='fb';return}
+  if(qi<QUIZ.length-1){qi++;render();return}
+  // finish
+  done=true;
+  const m=['再刷一遍吧,这个知识点很值得拿分。',
+          '差一点点,回去把分镜点一遍就全会了。',
+          '不错!你已经看懂这部短片的结构了。',
+          '满分!你可以当自己的片头解说员了。'];
+  qh.textContent=ans===3?'全部答对,太棒了!':'测验结束';
+  opts.innerHTML='';
+  fb.textContent=m[ans];fb.className=ans===3?'fb ok':'fb no';
+  next.textContent='↻ 再来一次';
+  sc.textContent='最终得分 '+ans+' / 3';
+};
+render();
+
+/* dandelion seeds on click */
+document.addEventListener('click',e=>{
+  for(let i=0;i<5;i++){
+    const s=document.createElement('div');
+    s.className='seed';s.textContent='✽';
+    s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
+    s.style.setProperty('--dx',(Math.random()*180-90)+'px');
+    s.style.setProperty('--dy',(Math.random()*-170-60)+'px');
+    s.style.animationDelay=(i*90)+'ms';
+    s.style.fontSize=(11+Math.random()*9)+'px';
+    s.style.color='rgba(201,162,39,.75)';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),5600);
+  }
+});
+
+/* scroll reveal + nav highlight */
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
+
+const secs=['watch','story','chars','craft','quiz'];
+const navA=[...document.querySelectorAll('.nav-links a')];
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY+120;let cur='watch';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.offsetTop<=y)cur=id});
+  navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>
