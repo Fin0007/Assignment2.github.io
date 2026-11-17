@@ -100,6 +100,7 @@
   .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:transparent}
   .cover{height:150px;display:grid;place-items:center;font-size:52px;position:relative;overflow:hidden}
   .cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 22%,rgba(255,255,255,.35),transparent 45%)}
+  .ext-badge{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,.9);color:var(--accent-deep);font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
   .card-body{padding:20px;display:flex;flex-direction:column;flex:1}
   .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .cat{font-size:12px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);padding:4px 10px;border-radius:8px}
@@ -354,6 +355,17 @@
         details 详情段落数组 / date 日期 / emoji 封面图标 / cover 封面渐变CSS */
 const WORKS = [
   {
+    title:"绿野仙踪 · 45秒动画短片", category:"设计作品", tags:["动画","水彩","分镜"],
+    summary:"把百年童话重新讲成45秒水彩动画，从分镜、配乐到彩蛋的完整制作手记。",
+    details:[
+      "用45秒重新讲述《绿野仙踪》：龙卷风卷走小屋，四个心怀遗憾的同伴在花田相遇，最后走回那本摊开的书里。",
+      "这是一个完整的互动展示页，包含成片播放、分镜一览、角色心愿、制作流程、配色方案和趣味小测验。",
+      "点开作品卡片即可进入完整展示页面。"
+    ],
+    date:"2026.10", emoji:"🌪️", cover:"linear-gradient(135deg,#f3ead6,#c9a227)",
+    link:"oz.html"
+  },
+  {
     title:"苏超公共关系案例解析", category:"课程项目", tags:["公共关系","案例分析","传播"],
     summary:"以江苏城市足球联赛为样本，梳理一次现象级传播背后的公关逻辑。",
     details:[
@@ -444,7 +456,7 @@ function renderWorks(){
   }
   grid.innerHTML = list.map((w,i)=>`
     <article class="card" data-idx="${WORKS.indexOf(w)}">
-      <div class="cover" style="background:${w.cover}">${w.emoji}</div>
+      <div class="cover" style="background:${w.cover}">${w.emoji}${w.link?'<span class="ext-badge">新页面 ↗</span>':''}</div>
       <div class="card-body">
         <div class="card-top"><span class="cat">${w.category}</span><span class="date">${w.date}</span></div>
         <h3>${w.title}</h3>
@@ -453,7 +465,11 @@ function renderWorks(){
       </div>
     </article>`).join('');
   grid.querySelectorAll('.card').forEach(card=>{
-    card.addEventListener('click',()=>openModal(WORKS[card.dataset.idx]));
+    card.addEventListener('click',()=>{
+      const w = WORKS[card.dataset.idx];
+      if(w.link){ window.open(w.link,'_blank'); }
+      else { openModal(w); }
+    });
   });
 }
 
