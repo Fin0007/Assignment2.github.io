@@ -1,706 +1,584 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>绿野仙踪 · 45秒动画短片 | 制作手记</title>
+<html lang="zh-CN" data-page-node-id="eOXW2VQWysvttjQC5q5oPe">
+<head data-page-node-id="DadMvWOf64j3nuXBtxoYMy">
+<meta charset="UTF-8" data-page-node-id="x6U39vdSBBljbvIri0HafR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="EKYPEm6cojARpEiWvTxtve">
+<title>小玲的小窝 · 个人作品集</title>
+<meta name="description" content="一个展示作品、记录思考、与人交流的个人空间" data-page-node-id="dmHsFTBQcmWDFoz7zk7j4i">
 <style>
-:root{
-  --paper:#f7f1e4;
-  --paper-2:#fffdf8;
-  --ink:#3d3226;
-  --ink-soft:#7a6b57;
-  --gold:#c9a227;
-  --gold-l:#e8c766;
-  --green:#7ba05b;
-  --rose:#c9737a;
-  --sky:#8fb8c9;
-  --violet:#9b8bb4;
-  --shadow:0 10px 40px rgba(61,50,38,.13);
-  --shadow-s:0 4px 16px rgba(61,50,38,.10);
-  --r:18px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",Georgia,serif;
-  background:var(--paper);
-  color:var(--ink);
-  line-height:1.75;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-/* ---------- paper texture ---------- */
-body::before{
-  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
-  mix-blend-mode:multiply;
-}
-::selection{background:var(--gold-l);color:var(--ink)}
+  :root{
+    --bg:#f5f9fc;
+    --surface:#ffffff;
+    --ink:#263745;
+    --ink-soft:#6c8192;
+    --line:#e2ebf3;
+    --accent:#5b9bd5;
+    --accent-soft:#e7f2fb;
+    --accent-deep:#3478a8;
+    --shadow:0 6px 24px rgba(50,100,145,.08);
+    --shadow-hover:0 12px 34px rgba(50,100,145,.16);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
 
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  /* ---------- Nav ---------- */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(245,249,252,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.5px}
+  .brand .logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#8ec6ea,#4e93c7);display:grid;place-items:center;color:#fff;font-size:17px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--ink-soft)}
+  .nav-links a{position:relative;padding:6px 0;transition:color .2s}
+  .nav-links a:hover{color:var(--accent-deep)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .25s}
+  .nav-links a:hover::after{width:100%}
+  .menu-btn{display:none;background:none;border:0;font-size:24px;color:var(--ink);cursor:pointer}
 
-/* ---------- nav ---------- */
-nav{
-  position:sticky;top:0;z-index:900;
-  background:rgba(247,241,228,.86);backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(61,50,38,.09);
-}
-.nav-in{max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:22px}
-.brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
-.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.16)}
-.nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.nav-links a{
-  color:var(--ink-soft);text-decoration:none;font-size:14.5px;padding:6px 13px;border-radius:999px;
-  transition:.25s;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
-}
-.nav-links a:hover{background:rgba(201,162,39,.14);color:var(--ink)}
-.nav-links a.on{background:var(--ink);color:var(--paper-2)}
+  /* ---------- Hero ---------- */
+  .hero{padding:78px 0 62px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent-deep);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;margin-bottom:20px}
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(91,155,213,.18)}
+  .hero h1{font-size:46px;line-height:1.25;letter-spacing:-.5px;margin-bottom:16px}
+  .hero h1 .name{color:var(--accent-deep)}
+  .hero .lead{font-size:18px;color:var(--ink-soft);margin-bottom:26px;max-width:520px}
+  .hero .desc{font-size:15px;color:var(--ink-soft);max-width:520px;margin-bottom:30px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:transform .18s,box-shadow .18s,background .18s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(91,155,213,.3)}
+  .btn-primary:hover{background:var(--accent-deep);box-shadow:0 10px 24px rgba(91,155,213,.4)}
+  .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .stats{display:flex;gap:30px;margin-top:34px}
+  .stat b{display:block;font-size:24px;color:var(--accent-deep)}
+  .stat span{font-size:13px;color:var(--ink-soft)}
+  .hero-art{position:relative;display:grid;place-items:center}
+  .avatar{width:250px;height:250px;border-radius:38% 62% 55% 45%/45% 45% 55% 55%;background:linear-gradient(135deg,#d6ecfb,#8ec5ec 55%,#6aa8d6);display:grid;place-items:center;font-size:96px;box-shadow:var(--shadow);animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .art-ring{position:absolute;width:300px;height:300px;border:1.5px dashed #cfe2f2;border-radius:50%;animation:spin 30s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .art-chip{position:absolute;background:var(--surface);padding:9px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:13px;font-weight:600;color:var(--accent-deep)}
+  .art-chip.a{top:8%;left:-2%}
+  .art-chip.b{bottom:12%;right:-4%}
+  /* 星星装饰 */
+  .star{position:absolute;color:var(--accent);pointer-events:none;animation:twinkle 3s ease-in-out infinite;text-shadow:0 2px 10px rgba(91,155,213,.35)}
+  .star.gold{color:#e9c46a;text-shadow:0 2px 10px rgba(233,196,106,.4)}
+  .star.s1{top:0;right:14%;font-size:28px;animation-delay:0s}
+  .star.s2{top:26%;left:0;font-size:19px;animation-delay:.7s}
+  .star.s3{bottom:24%;right:-1%;font-size:22px;animation-delay:1.4s}
+  .star.s4{bottom:6%;left:17%;font-size:15px;animation-delay:2.1s}
+  @keyframes twinkle{0%,100%{opacity:.95;transform:scale(1) rotate(-8deg)}50%{opacity:.4;transform:scale(.65) rotate(12deg)}}
 
-/* ---------- hero ---------- */
-header{position:relative;padding:76px 0 60px;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;opacity:.5}
-.hero-bg img{width:100%;height:100%;object-fit:cover}
-.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,241,228,.5) 0%,rgba(247,241,228,.86) 62%,var(--paper) 100%)}
-.hero-in{position:relative;z-index:2;text-align:center;max-width:760px;margin:0 auto}
-.tag{
-  display:inline-block;font-family:"PingFang SC",sans-serif;font-size:12.5px;letter-spacing:2.5px;
-  color:var(--gold);border:1px solid rgba(201,162,39,.45);padding:5px 16px;border-radius:999px;
-  background:rgba(255,253,248,.7);text-transform:uppercase;
-}
-h1{
-  font-size:clamp(42px,7.4vw,76px);line-height:1.14;margin:22px 0 8px;letter-spacing:2px;font-weight:700;
-}
-h1 .sub{display:block;font-size:.36em;letter-spacing:7px;color:var(--ink-soft);font-weight:400;margin-top:14px}
-.lede{font-size:clamp(15px,1.9vw,18.5px);color:var(--ink-soft);margin:20px auto 0;max-width:600px}
-.badges{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:26px;font-family:"PingFang SC",sans-serif}
-.badge{
-  background:var(--paper-2);border:1px solid rgba(61,50,38,.13);border-radius:999px;
-  padding:6px 15px;font-size:13px;color:var(--ink-soft);box-shadow:var(--shadow-s);
-}
-.badge b{color:var(--ink);font-weight:600}
+  /* ---------- Section ---------- */
+  section{padding:64px 0}
+  .sec-head{margin-bottom:34px}
+  .sec-kicker{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase}
+  .sec-kicker::before{content:"✦";margin-right:8px;color:var(--accent);opacity:.75}
+  .sec-head h2{font-size:32px;margin-top:6px;letter-spacing:-.3px}
+  .sec-head p{color:var(--ink-soft);margin-top:8px;font-size:15px}
+  .alt-bg{background:var(--surface)}
 
-/* ---------- section ---------- */
-section{padding:76px 0;position:relative}
-.sec-head{text-align:center;margin-bottom:44px}
-.sec-kicker{
-  font-family:"PingFang SC",sans-serif;font-size:12.5px;letter-spacing:3.5px;color:var(--gold);
-  text-transform:uppercase;margin-bottom:12px;
-}
-h2{font-size:clamp(27px,4vw,40px);letter-spacing:1.5px;line-height:1.3}
-.sec-desc{color:var(--ink-soft);margin-top:14px;max-width:620px;margin-inline:auto;font-size:15.5px}
+  /* ---------- Works ---------- */
+  .toolbar{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:28px}
+  .search{position:relative;flex:1;min-width:240px;max-width:360px}
+  .search input{width:100%;padding:12px 16px 12px 42px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);font-size:15px;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+  .search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(91,155,213,.12)}
+  .search .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-size:17px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-size:14px;color:var(--ink-soft);cursor:pointer;transition:all .2s;white-space:nowrap}
+  .chip:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:transparent}
+  .cover{height:150px;display:grid;place-items:center;font-size:52px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 22%,rgba(255,255,255,.35),transparent 45%)}
+  .card-body{padding:20px;display:flex;flex-direction:column;flex:1}
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .cat{font-size:12px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);padding:4px 10px;border-radius:8px}
+  .date{font-size:12px;color:#9aa8a2}
+  .card h3{font-size:18px;margin-bottom:8px;line-height:1.4}
+  .card p{font-size:14px;color:var(--ink-soft);flex:1}
+  .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+  .tag{font-size:12px;color:var(--ink-soft);background:var(--bg);padding:3px 9px;border-radius:6px}
+  .empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-soft)}
+  .empty .face{font-size:44px;display:block;margin-bottom:12px}
 
-/* ---------- player ---------- */
-.player-card{
-  background:var(--paper-2);border-radius:var(--r);box-shadow:var(--shadow);
-  border:1px solid rgba(61,50,38,.1);overflow:hidden;
-}
-.player-box{position:relative;background:#000;aspect-ratio:16/9}
-.player-box video{width:100%;height:100%;display:block;object-fit:contain}
-.ctrls{display:flex;align-items:center;gap:14px;padding:14px 18px;flex-wrap:wrap}
-.btn-play{
-  width:46px;height:46px;flex:none;border-radius:50%;border:none;cursor:pointer;
-  background:var(--ink);color:var(--paper-2);display:grid;place-items:center;transition:.22s;
-}
-.btn-play:hover{background:var(--gold);transform:scale(1.06)}
-.btn-play svg{width:19px;height:19px;fill:currentColor}
-.bar{flex:1;min-width:150px;height:7px;background:rgba(61,50,38,.13);border-radius:99px;cursor:pointer;position:relative}
-.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-l),var(--gold));border-radius:99px;width:0;transition:width .1s linear}
-.bar-dot{
-  position:absolute;top:50%;width:14px;height:14px;background:var(--paper-2);border:3px solid var(--gold);
-  border-radius:50%;top:-4px;transform:translateY(-50%);left:0;transition:left .1s linear;pointer-events:none;
-  box-shadow:0 1px 6px rgba(0,0,0,.25);
-}
-.time{font-family:"SF Mono",Consolas,monospace;font-size:13.5px;color:var(--ink-soft);min-width:88px;text-align:right}
-.ctrl-group{display:flex;gap:7px;align-items:center}
-.mini{
-  border:1px solid rgba(61,50,38,.16);background:transparent;border-radius:9px;cursor:pointer;
-  padding:7px 12px;font-size:12.5px;color:var(--ink-soft);font-family:"PingFang SC",sans-serif;transition:.2s;white-space:nowrap;
-}
-.mini:hover{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+  /* ---------- Guestbook ---------- */
+  .gb-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px}
+  .gb-form{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .gb-form h3{font-size:18px;margin-bottom:6px}
+  .gb-form .hint{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:var(--ink)}
+  .field input,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--surface);font-size:14px;color:var(--ink);font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(91,155,213,.12)}
+  .form-msg{font-size:13px;margin-top:10px;min-height:20px}
+  .form-msg.ok{color:var(--accent-deep)}
+  .form-msg.err{color:#c2603f}
+  .gb-list{display:flex;flex-direction:column;gap:14px;max-height:440px;overflow-y:auto;padding-right:6px}
+  .gb-list::-webkit-scrollbar{width:6px}
+  .gb-list::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+  .msg{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .msg-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .msg-av{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+  .msg-name{font-weight:600;font-size:14px}
+  .msg-time{font-size:12px;color:#9aa8a2;margin-left:auto}
+  .msg-body{font-size:14px;color:var(--ink-soft);white-space:pre-wrap;word-break:break-word}
+  .gb-status{font-size:14px;color:var(--ink-soft);padding:20px;text-align:center}
 
-/* caption bar under player */
-.cap-strip{
-  padding:15px 20px;text-align:center;border-top:1px dashed rgba(61,50,38,.14);
-  font-size:17px;color:var(--ink);min-height:56px;display:grid;place-items:center;letter-spacing:1px;
-}
-.cap-strip .ph{color:rgba(122,107,87,.5);font-size:14.5px}
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .about-text p{color:var(--ink-soft);margin-bottom:14px}
+  .about-text .lead-p{font-size:17px;color:var(--ink)}
+  .skill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .skill{background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:600;color:var(--accent-deep)}
+  .about-card{background:linear-gradient(135deg,#e6f2fc,#f2f8fd);border:1px solid var(--line);border-radius:24px;padding:38px;text-align:center}
+  .about-card .big{font-size:64px;margin-bottom:14px}
+  .about-card h3{font-size:22px;margin-bottom:8px}
+  .about-card p{color:var(--ink-soft);font-size:14px}
 
-/* ---------- shot rail ---------- */
-.rail-h{display:flex;align-items:center;justify-content:space-between;margin:34px 0 16px;flex-wrap:wrap;gap:12px}
-.rail-h h3{font-size:20px;letter-spacing:1px}
-.rail-h span{font-size:13.5px;color:var(--ink-soft);font-family:"PingFang SC",sans-serif}
-.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:14px}
-.shot{
-  position:relative;border-radius:13px;overflow:hidden;cursor:pointer;background:var(--ink);
-  border:2px solid transparent;transition:.26s;box-shadow:var(--shadow-s);
-}
-.shot img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:.4s;opacity:.9}
-.shot:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.shot:hover img{opacity:1;transform:scale(1.05)}
-.shot.act{border-color:var(--gold);transform:translateY(-4px)}
-.shot.act img{opacity:1}
-.shot .n{
-  position:absolute;top:8px;left:8px;background:rgba(0,0,0,.62);color:#fff;border-radius:7px;
-  padding:2px 8px;font-size:11.5px;font-family:"SF Mono",monospace;backdrop-filter:blur(4px);
-}
-.shot .cap{
-  position:absolute;left:0;right:0;bottom:0;padding:16px 10px 8px;
-  background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font-size:12.5px;line-height:1.5;
-}
-.shot .cap .t{font-family:"SF Mono",monospace;font-size:11px;opacity:.8}
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:#c9d6d1;padding:34px 0;font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .foot-inner .brand{color:#fff}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a:hover{color:#fff}
 
-/* ---------- tabs ---------- */
-.tabs{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
-.tab{
-  padding:9px 20px;border-radius:999px;border:1px solid rgba(61,50,38,.18);cursor:pointer;
-  background:var(--paper-2);font-size:14.5px;color:var(--ink-soft);transition:.24s;
-  font-family:"PingFang SC",sans-serif;
-}
-.tab:hover{border-color:var(--gold);color:var(--ink)}
-.tab.on{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
-.pane{display:none;animation:fade .45s ease}
-.pane.on{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  /* ---------- Modal ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(30,50,70,.5);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .25s}
+  .overlay.show{display:flex;opacity:1}
+  .modal{background:var(--surface);border-radius:22px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;transform:translateY(16px);transition:transform .25s;box-shadow:0 24px 60px rgba(0,0,0,.2)}
+  .overlay.show .modal{transform:translateY(0)}
+  .modal-cover{height:170px;display:grid;place-items:center;font-size:64px;position:relative}
+  .modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);border:0;font-size:20px;cursor:pointer;color:var(--ink);display:grid;place-items:center}
+  .modal-body{padding:28px 30px 32px}
+  .modal-body .cat{margin-bottom:12px;display:inline-block}
+  .modal-body h2{font-size:26px;margin-bottom:16px}
+  .modal-body .prose{color:var(--ink-soft);font-size:15px}
+  .modal-body .prose p{margin-bottom:12px}
+  .modal-body .tags{margin-top:22px}
 
-/* ---------- cards ---------- */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:20px}
-.card{
-  background:var(--paper-2);border-radius:var(--r);padding:26px 24px;border:1px solid rgba(61,50,38,.1);
-  box-shadow:var(--shadow-s);transition:.3s;position:relative;overflow:hidden;
-}
-.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-.card::after{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transition:.35s;transform-origin:left}
-.card:hover::after{transform:scaleX(1)}
-.card .ic{font-size:30px;margin-bottom:13px;display:block}
-.card h4{font-size:18.5px;margin-bottom:9px;letter-spacing:.5px}
-.card p{font-size:14.5px;color:var(--ink-soft);line-height:1.85}
-
-/* character cards */
-.chars{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:18px}
-.ch{
-  border-radius:var(--r);overflow:hidden;background:var(--paper-2);border:1px solid rgba(61,50,38,.1);
-  box-shadow:var(--shadow-s);transition:.34s;cursor:pointer;position:relative;
-}
-.ch:hover{transform:translateY(-6px) rotate(-.7deg);box-shadow:var(--shadow)}
-.ch .pic{height:172px;overflow:hidden;position:relative}
-.ch .pic img{width:100%;height:100%;object-fit:cover;object-position:center 32%;transition:.5s}
-.ch:hover .pic img{transform:scale(1.07)}
-.ch .info{padding:17px 19px 20px}
-.ch .nm{font-size:18px;font-weight:700;letter-spacing:.6px}
-.ch .en{font-family:"SF Mono",monospace;font-size:11.5px;color:var(--gold);letter-spacing:1.5px;margin-top:2px}
-.ch .wish{
-  font-size:13.5px;color:var(--ink-soft);margin-top:11px;padding-top:11px;
-  border-top:1px dashed rgba(61,50,38,.16);line-height:1.75;
-}
-.ch .wish b{color:var(--rose);font-weight:600}
-
-/* ---------- process timeline ---------- */
-.flow{position:relative;padding-left:38px}
-.flow::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),rgba(201,162,39,.15))}
-.step{position:relative;margin-bottom:30px}
-.step::before{
-  content:attr(data-n);position:absolute;left:-38px;top:2px;width:24px;height:24px;border-radius:50%;
-  background:var(--paper-2);border:2px solid var(--gold);color:var(--gold);
-  display:grid;place-items:center;font-size:12px;font-family:"SF Mono",monospace;font-weight:700;
-}
-.step h4{font-size:17.5px;margin-bottom:7px;letter-spacing:.5px}
-.step p{font-size:14.5px;color:var(--ink-soft);line-height:1.85}
-.step .pill{
-  display:inline-block;margin-top:9px;font-family:"PingFang SC",sans-serif;font-size:12px;
-  background:rgba(123,160,91,.15);color:#5c7a43;padding:3px 11px;border-radius:999px;
-}
-
-/* ---------- quiz ---------- */
-.quiz{background:linear-gradient(150deg,#fffdf8,#f3ead6);border-radius:26px;padding:44px 34px;border:1px solid rgba(201,162,39,.32);box-shadow:var(--shadow);text-align:center;max-width:680px;margin:0 auto;position:relative;overflow:hidden}
-.quiz::before{content:"✦";position:absolute;font-size:190px;color:rgba(201,162,39,.09);top:-42px;right:-24px;pointer-events:none}
-.quiz h3{font-size:24px;letter-spacing:1px;margin-bottom:9px}
-.quiz .qh{font-size:17px;color:var(--ink-soft);margin-bottom:22px;min-height:28px}
-.opts{display:grid;gap:10px;margin-bottom:18px}
-.opt{
-  background:var(--paper-2);border:2px solid rgba(61,50,38,.13);border-radius:13px;padding:14px 18px;
-  cursor:pointer;text-align:left;font-size:15.5px;transition:.22s;font-family:inherit;color:var(--ink);
-  display:flex;align-items:center;gap:12px;line-height:1.6;
-}
-.opt:hover:not(:disabled){border-color:var(--gold);transform:translateX(5px);background:#fff}
-.opt .k{
-  width:26px;height:26px;flex:none;border-radius:50%;background:rgba(61,50,38,.09);
-  display:grid;place-items:center;font-size:13px;font-family:"SF Mono",monospace;
-}
-.opt.right{border-color:#5c9a4a;background:#f0f8ec}
-.opt.right .k{background:#5c9a4a;color:#fff}
-.opt.wrong{border-color:var(--rose);background:#fdf0f0}
-.opt.wrong .k{background:var(--rose);color:#fff}
-.opt:disabled{cursor:default}
-.fb{font-size:15px;min-height:26px;color:var(--ink-soft);margin-bottom:14px}
-.fb.ok{color:#4d8a3c;font-weight:600}
-.fb.no{color:var(--rose);font-weight:600}
-.btn{
-  background:var(--ink);color:var(--paper-2);border:none;border-radius:999px;padding:11px 30px;
-  font-size:15px;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:.24s;
-}
-.btn:hover{background:var(--gold);transform:translateY(-2px)}
-.score{font-family:"SF Mono",monospace;font-size:13px;color:var(--ink-soft);margin-top:14px}
-
-/* ---------- palette ---------- */
-.pal{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.sw{
-  width:104px;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--paper-2);
-  border:1px solid rgba(61,50,38,.11);box-shadow:var(--shadow-s);transition:.28s;
-}
-.sw:hover{transform:translateY(-6px) rotate(2deg);box-shadow:var(--shadow)}
-.sw .c{height:76px}
-.sw .m{padding:9px 7px;text-align:center}
-.sw .m b{display:block;font-size:13px}
-.sw .m span{font-family:"SF Mono",monospace;font-size:10.5px;color:var(--ink-soft)}
-
-/* ---------- footer ---------- */
-footer{
-  border-top:1px solid rgba(61,50,38,.1);padding:46px 0 60px;text-align:center;
-  background:linear-gradient(180deg,transparent,rgba(201,162,39,.07));
-}
-footer p{color:var(--ink-soft);font-size:14.5px}
-footer .q{font-size:19px;color:var(--ink);letter-spacing:2px;margin-bottom:14px}
-
-/* ---------- dandelion float ---------- */
-.seed{position:fixed;z-index:800;pointer-events:none;font-size:15px;opacity:.5;animation:fl 5s linear forwards}
-@keyframes fl{
-  0%{transform:translate(0,0) rotate(0);opacity:0}
-  12%{opacity:.65}
-  100%{transform:translate(var(--dx),var(--dy)) rotate(320deg);opacity:0}
-}
-
-/* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(26px);transition:.75s cubic-bezier(.2,.7,.3,1)}
-.rv.in{opacity:1;transform:none}
-
-/* ---------- responsive ---------- */
-@media(max-width:760px){
-  .nav-links{display:none}
-  header{padding:52px 0 40px}
-  .shot .cap{font-size:11px;padding:14px 7px 6px}
-  .shots{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
-  .flow{padding-left:32px}
-  section{padding:56px 0}
-  .cap-strip{font-size:15px}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media(max-width:820px){
+    .hero-grid,.gb-wrap,.about-grid{grid-template-columns:1fr}
+    .hero-art{order:-1}
+    .avatar{width:190px;height:190px;font-size:72px}
+    .art-ring{width:230px;height:230px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:none;position:absolute;top:66px;left:0;right:0;background:var(--surface);flex-direction:column;gap:0;padding:10px 22px;border-bottom:1px solid var(--line)}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:12px 0}
+    .menu-btn{display:block}
+    .hero h1{font-size:36px}
+  }
+  @media(max-width:520px){
+    .grid{grid-template-columns:1fr}
+    .stats{gap:20px}
+    section{padding:48px 0}
+  }
 </style>
 </head>
-<body>
+<body data-page-node-id="9ZoXBNC49vNxEHyH4xD9dd">
 
-<nav>
-  <div class="nav-in">
-    <div class="brand"><span class="dot"></span>绿野仙踪 · 动画短片</div>
-    <div class="nav-links">
-      <a href="#watch">成片</a>
-      <a href="#story">内容讲解</a>
-      <a href="#chars">角色</a>
-      <a href="#craft">制作思路</a>
-      <a href="#quiz">趣味互动</a>
-    </div>
-  </div>
-</nav>
-
-<header>
-  <div class="hero-bg"><img src="assets/poster.jpg" alt=""></div>
-  <div class="hero-fade"></div>
-  <div class="hero-in">
-    <span class="tag">AI Animation Short · 2026</span>
-    <h1>绿野仙踪<span class="sub">THE WONDERFUL WIZARD OF OZ</span></h1>
-    <p class="lede">
-      45秒,把一个百年童话重新讲了一遍。<br>
-      龙卷风卷走小屋与女孩,四个心怀遗憾的同伴在花田相遇,<br>
-      最后走回那本摊开的书里——最好的旅途,是遇见更好的自己。
-    </p>
-    <div class="badges">
-      <span class="badge">时长 <b>45s</b></span>
-      <span class="badge">分镜 <b>10 镜</b></span>
-      <span class="badge">规格 <b>1920×1080</b></span>
-      <span class="badge">帧率 <b>30fps</b></span>
-      <span class="badge">风格 <b>水彩绘本</b></span>
-      <span class="badge">配乐 <b>原创 BGM</b></span>
-    </div>
+<!-- Nav -->
+<header class="nav" data-page-node-id="gLL7zZsou21ITFB9CjWwMo">
+  <div class="wrap nav-inner" data-page-node-id="KP2OJJ8ErWcGnCWaE6duoC">
+    <a href="#top" class="brand" data-page-node-id="VgUz0KTT3pYFVhIVqWGjeW"><span class="logo" data-page-node-id="ZsjccFA5h2GKDMVGGWvGIt">✦</span> 小玲的小窝</a>
+    <nav class="nav-links" id="navLinks" data-page-node-id="eRdVRhTynEguFj5RsJJcVZ">
+      <a href="#top" data-page-node-id="eaosNGkUECWgzPSyJsQlAn">首页</a>
+      <a href="#works" data-page-node-id="oGzdRiFpDMB17VYW9vF1Sa">作品</a>
+      <a href="#guestbook" data-page-node-id="IPMyIfmlmTtNlUKxxNFycO">留言板</a>
+      <a href="#about" data-page-node-id="QYwdVkUi9NVLowOQsoWHpO">关于我</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="菜单" data-page-node-id="K6MMfHu23dsekswkZKNrPO">☰</button>
   </div>
 </header>
 
-<!-- ================= 成片 ================= -->
-<section id="watch">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="sec-kicker">The Film</div>
-      <h2>成品短片</h2>
-      <p class="sec-desc">点击分镜可跳转到对应时间,字幕随播放同步高亮。</p>
-    </div>
-
-    <div class="player-card rv">
-      <div class="player-box">
-        <video id="v" preload="metadata" playsinline poster="assets/poster.jpg">
-          <source src="assets/video_720.mp4" type="video/mp4">
-        </video>
+<!-- Hero -->
+<section class="hero" id="top" data-page-node-id="ivv0wYLILUgvSkqY3030pn">
+  <div class="wrap hero-grid" data-page-node-id="vrkSebJkwZ6XCSbLqMtiUP">
+    <div data-page-node-id="BewLaZxtjc3mT8TrmMXFwH">
+      <span class="badge" data-page-node-id="qTvKwz0GC5ChQZTAL5qzmG"><span class="dot" data-page-node-id="KHSfvpfDO8a7YfwF3NB36L"></span> 你好，欢迎光临</span>
+      <h1 data-page-node-id="aVVqKQFwsvXr2msLHGHS1o">我是 <span class="name" data-page-node-id="lYAULx1hP1dBV69kESGA7b">小玲</span>,<br data-page-node-id="S8mERxkyeiuJ9x9i2KMHpF">一个热爱创造的<br data-page-node-id="iNTTyPnnoOZ6ueijAvxnaP">普通学生。</h1>
+      <p class="lead" data-page-node-id="517oZUGZahbKIUKmk1pj2T">在这里记录我的作品、想法和成长轨迹。</p>
+      <p class="desc" data-page-node-id="H11jidB2StOxKLkugmF2TM">我相信每一个认真做过的小项目，都值得被好好展示。这个博客就是我的小小陈列室——随便逛逛，喜欢的话留个言吧。</p>
+      <div class="hero-actions" data-page-node-id="gvc1dzz5B0C2cfFl6KB6LX">
+        <a href="#works" class="btn btn-primary" data-page-node-id="duDOMaM8u4r9ivgXIrDI1m">查看作品 →</a>
+        <a href="#guestbook" class="btn btn-ghost" data-page-node-id="zMCXxvBMAbDjSmpfA3MCeC">给我留言</a>
       </div>
-      <div class="ctrl-group" style="padding:0 18px">
-        <div class="bar" id="bar"><div class="bar-fill" id="fill"></div><div class="bar-dot" id="dot"></div></div>
-      </div>
-      <div class="ctrls">
-        <button class="btn-play" id="play" aria-label="播放">
-          <svg id="pico" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <div class="time"><span id="cur">0:00</span> / 0:45</div>
-        <button class="mini" id="mute">🔊 声音</button>
-        <button class="mini" id="loop">🔁 循环</button>
-        <button class="mini" id="fs">⛶ 全屏</button>
-      </div>
-      <div class="cap-strip"><span id="cap" class="ph">点击播放,这里会同步显示片中的旁白字幕…</span></div>
-    </div>
-
-    <div class="rail-h">
-      <h3>分镜一览</h3>
-      <span>10 个镜头 · 点击任意镜头跳转播放</span>
-    </div>
-    <div class="shots" id="rail"></div>
-  </div>
-</section>
-
-<!-- ================= 内容讲解 ================= -->
-<section id="story" style="background:linear-gradient(180deg,transparent,rgba(255,253,248,.7),transparent)">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="sec-kicker">Story Breakdown</div>
-      <h2>内容讲解</h2>
-      <p class="sec-desc">原著是一部长篇冒险,45秒讲不了。所以我们只留了一条主线:<b>被卷走 → 相遇 → 同行 → 归来</b>。</p>
-    </div>
-
-    <div class="tabs rv" id="tabs">
-      <div class="tab on" data-t="0">四幕结构</div>
-      <div class="tab" data-t="1">改编取舍</div>
-      <div class="tab" data-t="2">视听语言</div>
-    </div>
-
-    <div class="pane on" data-p="0">
-      <div class="grid3">
-        <div class="card rv"><span class="ic">🌪️</span><h4>第一幕 · 意外</h4><p>开场即是全片唯一的"意外":龙卷风把整座木屋连人带狗卷上天空,画面在旋转中失衡。原著里平静的乡村生活被彻底打碎——<b>冒险不是被选择的,是被卷进来的。</b></p></div>
-        <div class="card rv"><span class="ic">🌾</span><h4>第二幕 · 相遇</h4><p>女孩落在花田与草屋之间,先后遇见稻草人、铁皮人和狮子。三次相遇用了几乎相同的构图:人物并排望向画外,唯一的区别是背景色。<b>重复的构图,累积起"同行"的意义。</b></p></div>
-        <div class="card rv"><span class="ic">🏰</span><h4>第三幕 · 同行</h4><p>四人背影走向绿野尽头的城堡,字幕"结伴而行,彼此成就"。这里镜头第一次从"面对"切到"背对"——<b>观众被邀请到他们身后,一起走。</b></p></div>
-        <div class="card rv"><span class="ic">📖</span><h4>第四幕 · 归来</h4><p>终点不是城墙,而是一本摊开的书。金色的烟云把四人重新收进书页,首尾呼应。<b>故事讲完了,而书还没合上——童话仍在继续。</b></p></div>
+      <div class="stats" data-page-node-id="eNprGXzclHjFKkbCuqZV9A">
+        <div class="stat" data-page-node-id="mwJER7GTwzsKrTuHMzVbQF"><b id="statWorks" data-page-node-id="KMYTNowy6KMZZmE9xKD6e3">0</b><span data-page-node-id="mSBzyjpgJ2uHX1EUONiiHi">个作品</span></div>
+        <div class="stat" data-page-node-id="HsFX9qr0Bb2mHS1khjxrCG"><b data-page-node-id="N1iAUb0Vc9nVHkqnpdBJ9I">4</b><span data-page-node-id="1aV34HkVGvYlzAd0edSTf6">个领域</span></div>
+        <div class="stat" data-page-node-id="h9fpfo0l63UEL5B8CB0DYw"><b data-page-node-id="Ggmq1tmaArTLojAEX6zZpp">∞</b><span data-page-node-id="cOUWcCIkkDQNfm3PDEF310">份热情</span></div>
       </div>
     </div>
-
-    <div class="pane" data-p="1">
-      <div class="grid3">
-        <div class="card rv"><span class="ic">✂️</span><h4>删掉了什么</h4><p>女巫、胆小的狮子内心戏、翡翠城里的骗术、国王的女儿,全部舍弃。45秒的体量里,任何支线都会稀释主线。我们保留了"想回家"这一句话,就足以让情感落地。</p></div>
-        <div class="card rv"><span class="ic">🔁</span><h4>为什么改写开场</h4><p>原著是多姆被 Gentle Wind 吹走,而我们让她连房子一起被龙卷风带走。<b>视觉冲击更强</b>——旋转的木屋本身就是转场,不需要额外解释。</p></div>
-        <div class="card rv"><span class="ic">💫</span><h4>加了什么</h4><p>原著中三人是被 Dorothy 拉上路的。改写版把他们都处理成<b>同样心怀遗憾的人</b>,字幕写"四个心怀遗憾的追梦人"。孤独者遇孤独者,才是"彼此成就"的前提。</p></div>
-        <div class="card rv"><span class="ic">🔚</span><h4>结局的翻转</h4><p>原著结局是回到Kansas 家门口,带着"我也能"的感悟。改写版的落点更抽象:<b>场景缩进书里</b>,暗示旅程本身就是目的,不需要真正抵达某个地方。</p></div>
-      </div>
-    </div>
-
-    <div class="pane" data-p="2">
-      <div class="grid3">
-        <div class="card rv"><span class="ic">🎨</span><h4>水彩质感</h4><p>全片统一在<b>水彩绘本</b>质感上:纸纹底、颜料边缘的晕染、饱和度偏低但通透。转场时用"颜料流动"衔接,而不是硬切。</p></div>
-        <div class="card rv"><span class="ic">🎼</span><h4>音乐结构</h4><p>BGM 走的是五声音阶的弦乐主题,情绪曲线为:<b>紧张(龙卷风)→ 明亮(相遇)→ 展开(同行)→ 温柔收束(书页)</b>。片尾留了 2 秒余韵,让情绪落地。</p></div>
-        <div class="card rv"><span class="ic">🔤</span><h4>字幕策略</h4><p>全片只有 4 句字幕,每句不超过 9 个字,居中偏下,带描边保证在任何画面上都可读。<b>少即是多</b>——留白让画面自己说话。</p></div>
-        <div class="card rv"><span class="ic">🖼️</span><h4>构图法则</h4><p>大量使用<b>中心对称</b>与<b>前景遮挡</b>(花草、蒲公英)制造层次。人物多置于画面下三分之一,天空留给云和城堡,强化"渺小但坚定"的叙事感。</p></div>
-      </div>
+    <div class="hero-art" data-page-node-id="GY0H07oCn3R3p90AhCGqfH">
+      <div class="art-ring" data-page-node-id="Ip3kEmihHCJdzdNQbssQZC"></div>
+      <div class="avatar" data-page-node-id="hp0IcMNlou52PC9KjP0qBe">⭐</div>
+      <span class="star s1" data-page-node-id="78vO0Ivaw130V9bZ90gtXk">✦</span>
+      <span class="star s2 gold" data-page-node-id="n6WUeXyLUU0arj2CV2ccxq">✧</span>
+      <span class="star s3" data-page-node-id="ottXsBdNmyq5ROKGT6p0BU">✦</span>
+      <span class="star s4 gold" data-page-node-id="QNQ8IXhTHFtx2HPubc8KAj">✧</span>
+      <div class="art-chip a" data-page-node-id="qewACEXlTvFwl1FU0OPR7Z">✦ 保持好奇</div>
+      <div class="art-chip b" data-page-node-id="O7icKhPJkyEQVN7Zt4HdHk">☕ 慢慢来</div>
     </div>
   </div>
 </section>
 
-<!-- ================= 角色 ================= -->
-<section id="chars">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="sec-kicker">Characters</div>
-      <h2>四个心怀遗憾的同行者</h2>
-      <p class="sec-desc">他们带着各自的缺口出发,在路上互相补齐。点一点,看看各自的遗憾。</p>
+<!-- Works -->
+<section id="works" class="alt-bg" data-page-node-id="wwFfxbddLXF29G6KHGvrcr">
+  <div class="wrap" data-page-node-id="aH5Xps7pAsKgYk9WXtQQMS">
+    <div class="sec-head" data-page-node-id="03HF7DLuYP2WFYDrlTO5c6">
+      <div class="sec-kicker" data-page-node-id="hFTcNenrmFOfI1cgOEGthb">My Works</div>
+      <h2 data-page-node-id="ornvDt9QY8kBp5a4LQiHjO">作品陈列室</h2>
+      <p data-page-node-id="G0anoz3BGAi4inijvGr0hh">课程项目、设计练习、技术尝试和一些读书笔记，点开卡片看详情。</p>
     </div>
-    <div class="chars">
-      <div class="ch rv" data-w="多姆想要的是回家。可当龙卷风把她和房子一起卷走,她连"想要什么"都来不及想清楚,就已经上路了。她是四人里唯一还没开始寻找的人——因为她还没意识到自己丢了东西。">
-        <div class="pic"><img src="assets/shot_03.jpg" alt="多姆"></div>
-        <div class="info"><div class="nm">多姆 · 小女孩</div><div class="en">DOROTHY</div>
-        <div class="wish">心愿:<b>回家</b></div></div>
+    <div class="toolbar" data-page-node-id="wOiHa3SY5MTcTXQx35kvTk">
+      <div class="search" data-page-node-id="RFsNdm5yNVetGNAsaEY8HP">
+        <span class="icon" data-page-node-id="4OgVLFO7IIdIoADYNIcR2L">🔍</span>
+        <input type="text" id="searchInput" placeholder="搜索作品标题、标签或关键词…" autocomplete="off" data-page-node-id="PIZOlwuc9XHrjYUhGeYhHU">
       </div>
-      <div class="ch rv" data-w="稻草人想要一颗心脏。他挂在田里太久,以为自己的恐惧和笨拙都源于那缺失的一块。多数时候他并不需要心脏,他只是以为自己需要。">
-        <div class="pic"><img src="assets/shot_04.jpg" alt="稻草人"></div>
-        <div class="info"><div class="nm">稻草人</div><div class="en">SCARECROW</div>
-        <div class="wish">心愿:<b>一颗会跳动的心</b></div></div>
-      </div>
-      <div class="ch rv" data-w="铁皮人想要一颗心。造他的工匠把他的心取走,于是他成了会说话的铁。他握着斧头的样子很凶,但他唯一想做的事,是学会在乎别人。">
-        <div class="pic"><img src="assets/shot_05.jpg" alt="铁皮人"></div>
-        <div class="info"><div class="nm">铁皮人</div><div class="en">TIN MAN</div>
-        <div class="wish">心愿:<b>一颗温柔的心</b></div></div>
-      </div>
-      <div class="ch rv" data-w="狮子想要勇气。他有一身强壮的身体和一颗胆小的肠子,所以总是被自己的吼声骗到。他在花田里低下头的样子,和片尾并肩的样子完全不同。">
-        <div class="pic"><img src="assets/shot_06.jpg" alt="狮子"></div>
-        <div class="info"><div class="nm">狮子</div><div class="en">LION</div>
-        <div class="wish">心愿:<b>一点勇气</b></div></div>
+      <div class="filters" id="filters" data-page-node-id="h8De54qjPZe3vq96crqFYB"></div>
+    </div>
+    <div class="grid" id="worksGrid" data-page-node-id="GcPL4usAomvF92lZI8EkBf"></div>
+  </div>
+</section>
+
+<!-- Guestbook -->
+<section id="guestbook" data-page-node-id="gNcrsA8UMxnaDK0dtgFmih">
+  <div class="wrap" data-page-node-id="fE7AKRk0ZqBRLBZ5PUM4EY">
+    <div class="sec-head" data-page-node-id="vrSOGBVKMLL2GU8rCzrY3e">
+      <div class="sec-kicker" data-page-node-id="6xEGHrPgNbwdNExdVfcZEi">Guestbook</div>
+      <h2 data-page-node-id="DT06voqDIveiKoCvn9PgSO">留言板</h2>
+      <p data-page-node-id="lSMWagFQoTShbQvWwC5h0f">不用登录，写下你的想法就能发布，大家都能看到。</p>
+    </div>
+    <div class="gb-wrap" data-page-node-id="lxAxTl4Hk8sJSQddoqmDBJ">
+      <form class="gb-form" id="gbForm" data-page-node-id="ULG9hzEatem2d7Y4Sz3HUL">
+        <h3 data-page-node-id="KUfbmG4ZqgBO9l4AJfZAKo">写点什么吧 ✍️</h3>
+        <p class="hint" data-page-node-id="Q9OYS8Kplk9s3RPcLrTB2z">你的留言会保存在云端，刷新页面也不会消失。</p>
+        <div class="field" data-page-node-id="uMB4Pp1VgFD1AEhxhkGovN">
+          <label for="gbName" data-page-node-id="jzFeKE6A9dtdfnrsmTTUgr">你的昵称</label>
+          <input type="text" id="gbName" maxlength="20" placeholder="例如：路过的小明" value="" data-page-node-id="KHA3SdezTFBW9TOyoHdVjb">
+        </div>
+        <div class="field" data-page-node-id="02jqjtSt8RxyRqLKGcr66N">
+          <label for="gbContent" data-page-node-id="CCytNLyqwZGaki10XzOSJR">留言内容</label>
+          <textarea id="gbContent" maxlength="300" placeholder="说点什么…（最多 300 字）"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="gbSubmit" data-page-node-id="CQMuyCGAdFPdqsC7tMpei9">发布留言</button>
+        <div class="form-msg" id="gbMsg" data-page-node-id="DSVuqXfLDbz7tDpUHzgvAs"></div>
+      </form>
+      <div data-page-node-id="mFHJBUL1VxfFQoJ4yCmj19">
+        <div class="gb-list" id="gbList" data-page-node-id="VnLTwM7VYvxFCCjGRKA4GO">
+          <div class="gb-status" data-page-node-id="5aa4WgvmmbS6HVSVJxkd0Q">正在加载留言…</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= 制作思路 ================= -->
-<section id="craft" style="background:linear-gradient(180deg,transparent,rgba(255,253,248,.75),transparent)">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="sec-kicker">Behind the Scenes</div>
-      <h2>制作过程思路</h2>
-      <p class="sec-desc">从一句台词到 45 秒成片,拆成 6 个可复用的步骤。</p>
+<!-- About -->
+<section id="about" class="alt-bg" data-page-node-id="nyAF93XvTySSNDeRuGiGlx">
+  <div class="wrap about-grid" data-page-node-id="JeBQVTVE8bQbGOq42jKUmv">
+    <div class="about-text" data-page-node-id="aF1BYoRTKWnMX1XPOiGja4">
+      <div class="sec-kicker" data-page-node-id="fLpIMkQ9sqSfsFMLAZ7JdG">About Me</div>
+      <h2 style="font-size:32px;margin:6px 0 18px" data-page-node-id="AZH5AYzMwcOAX3ymuPfUY0">关于我</h2>
+      <p class="lead-p" data-page-node-id="8LIC06kChyOwZvvGEAkk6k">嗨，我是小玲，一名还在不断学习和尝试的学生。</p>
+      <p data-page-node-id="Q9PL4Z6w8sQj4JkoCDsjZS">我喜欢把学到的东西做成看得见、摸得着的小作品——不管是活动策划、PPT 设计，还是一个小小的网页。对我来说，动手做一遍，比读十遍书都记得牢。</p>
+      <p data-page-node-id="vVFGNh8wEGQ6iUQzOJ66MB">这个博客会持续更新，记录我做过的项目和一路上的想法。如果你也在做类似的事，欢迎交流！</p>
+      <div class="skill-list" data-page-node-id="AT5EB4L2KaOcJyL4KdmWFx">
+        <span class="skill" data-page-node-id="8f5nbUZEYXJsHtCzPIjt1Z">活动策划</span>
+        <span class="skill" data-page-node-id="TbPaZb6MMMSG6DnVyhLCVi">PPT 设计</span>
+        <span class="skill" data-page-node-id="60MH6FbkPfA6AGq0KdgsRy">内容写作</span>
+        <span class="skill" data-page-node-id="5texmdYOYH3mNpnNbYG2yP">网页制作</span>
+        <span class="skill" data-page-node-id="wCYuKuB4phqDONT7iDNLKH">数据整理</span>
+      </div>
     </div>
-
-    <div class="grid3 rv" style="margin-bottom:44px">
-      <div class="card"><span class="ic">🎬</span><h4>分镜先行</h4><p>先画 10 张关键帧,把节奏定死,再谈动效。水彩风的好处是<b>静帧本身就成立</b>,所以每一格都能直接当海报用。</p></div>
-      <div class="card"><span class="ic">🎙️</span><h4>音频先行</h4><p>配音和 BGM 先定稿,再按 45 秒卡时间轴。<b>声音决定节奏,画面服从节奏</b>,反过来做一定返工。</p></div>
-      <div class="card"><span class="ic">🌈</span><h4>风格锚定</h4><p>第一帧定调:纸纹、水彩边缘、低饱和暖色。后续 9 帧全部照着它生成,<b>风格漂移是最贵的返工</b>。</p></div>
-    </div>
-
-    <div class="flow">
-      <div class="step rv" data-n="1"><h4>读原著,做取舍</h4><p>通读《绿野仙踪》,列出所有情节点,只保留能服务"遇见自己"这条线的部分。删掉女巫与骗术,把体量全部让给情感。</p><span class="pill">原著 → 核心线</span></div>
-      <div class="step rv" data-n="2"><h4>写 4 句字幕</h4><p>「一场意外,开启冒险」「四个心怀遗憾的追梦人」「结伴而行,彼此成就」「你想要的,一直都在自己身上」——用最少文字定下全片情绪。</p><span class="pill">文案 → 情绪锚</span></div>
-      <div class="step rv" data-n="3"><h4>绘分镜,锁构图</h4><p>10 格关键帧,每格标注时长。三次"相遇"刻意复用同一构图,片尾与首帧做书页呼应,形成闭环。</p><span class="pill">10 镜 → 时间轴</span></div>
-      <div class="step rv" data-n="4"><h4>生成画面并统一风格</h4><p>逐镜生成后做一次风格校正:统一色温、笔触、纸张底色,尤其是角色造型——铁皮人的爱心和稻草人的补丁是识别锚点,必须一致。</p><span class="pill">风格漂移校正</span></div>
-      <div class="step rv" data-n="5"><h4>加入运镜与转场</h4><p>静态水彩靠运镜产生呼吸感:缓推、缓拉、轻微手持感。转场用颜料流动衔接,全书 10 镜只有 1 次硬切(龙卷风出场)。</p><span class="pill">缓推 / 缓拉 / 颜料转场</span></div>
-      <div class="step rv" data-n="6"><h4>混音,压字幕</h4><p>旁白置顶、BGM 压低 6dB,字幕加 2px 描边。最后检查 4 句字幕的时间点是否落在情绪拐点上。</p><span class="pill">母带 / 字幕描边</span></div>
-    </div>
-
-    <div class="sec-head rv" style="margin-top:56px">
-      <div class="sec-kicker">Color Palette</div>
-      <h2>全片主色</h2>
-      <p class="sec-desc">从成片中提取的色彩,也是这套水彩风格的"身份证"。</p>
-    </div>
-    <div class="pal rv">
-      <div class="sw"><div class="c" style="background:#f7f1e4"></div><div class="m"><b>纸底</b><span>#F7F1E4</span></div></div>
-      <div class="sw"><div class="c" style="background:#7ba05b"></div><div class="m"><b>草绿</b><span>#7BA05B</span></div></div>
-      <div class="sw"><div class="c" style="background:#e8c766"></div><div class="m"><b>暖金</b><span>#E8C766</span></div></div>
-      <div class="sw"><div class="c" style="background:#c9737a"></div><div class="m"><b>砖红</b><span>#C9737A</span></div></div>
-      <div class="sw"><div class="c" style="background:#8fb8c9"></div><div class="m"><b>天青</b><span>#8FB8C9</span></div></div>
-      <div class="sw"><div class="c" style="background:#9b8bb4"></div><div class="m"><b>暮紫</b><span>#9B8BB4</span></div></div>
-      <div class="sw"><div class="c" style="background:#3d3226"></div><div class="m"><b>墨褐</b><span>#3D3226</span></div></div>
+    <div class="about-card" data-page-node-id="2BBGIuaCVp4I8fa9c9kHHC">
+      <div class="big" data-page-node-id="98QhoSv4Yi9jhQkFUqKV08">☁️</div>
+      <h3 data-page-node-id="nJt1FJXm7IcZZWZSniiktA">保持热爱，慢慢生长</h3>
+      <p data-page-node-id="Igkrb2HB7vECjuKTV2vw8C">每一次尝试都算数，<br data-page-node-id="gjqmwx60aP3ntTU4H1YyG2">每一个作品都值得被看见。</p>
     </div>
   </div>
 </section>
 
-<!-- ================= 互动 ================= -->
-<section id="quiz">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="sec-kicker">Play & Learn</div>
-      <h2>趣味互动</h2>
-      <p class="sec-desc">三道题,检验一下你看片有多仔细。</p>
+<!-- Footer -->
+<footer data-page-node-id="bFWCwo9QLIViw2OxztM20U">
+  <div class="wrap foot-inner" data-page-node-id="eECT5iumUn4Ta4KUhA9DCD">
+    <a href="#top" class="brand" data-page-node-id="b6555m9hEYFi7nmePG98RQ"><span class="logo" data-page-node-id="OV2dBroClgJ3ZEM1pFnRiJ">✦</span> 小玲的小窝</a>
+    <div class="foot-links" data-page-node-id="WkkHMhe8qQfUErIPcRftGk">
+      <a href="#works" data-page-node-id="jzZcENC4aPBVHLxix8fA8k">作品</a>
+      <a href="#guestbook" data-page-node-id="PEkIM9uNcUmDYWRdHnf5LC">留言板</a>
+      <a href="#about" data-page-node-id="CsRMJA2cNKrrfbltECw3qo">关于我</a>
     </div>
-    <div class="quiz rv">
-      <h3>🎲 童话小测验</h3>
-      <div class="qh" id="qh"></div>
-      <div class="opts" id="opts"></div>
-      <div class="fb" id="fb">从第一题开始吧。</div>
-      <button class="btn" id="next">下一题 →</button>
-      <div class="score" id="score"></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p class="q">「 最好的旅途,是遇见更好的自己 」</p>
-    <p>绿野仙踪 · 45 秒动画短片 &nbsp;|&nbsp; 制作手记</p>
-    <p style="font-size:12.5px;opacity:.65;margin-top:9px;font-family:'PingFang SC',sans-serif">水彩绘本风 &nbsp;·&nbsp; 1920×1080 &nbsp;·&nbsp; 30fps &nbsp;·&nbsp; 45s</p>
+    <span data-page-node-id="H3t3ZPNARowEBLqMG38s2f">© <span id="year" data-page-node-id="ZD8m87dmBtiCqeMXJqnHnT"></span> 小玲的小窝 · 用心制作</span>
   </div>
 </footer>
 
+<!-- Detail Modal -->
+<div class="overlay" id="overlay" data-page-node-id="AWgfs4jv9J7O8vJFz0PvFi">
+  <div class="modal" role="dialog" aria-modal="true" data-page-node-id="lBAOHrrL6J2end5oa9gsb3">
+    <div class="modal-cover" id="modalCover" data-page-node-id="u2RUaPA3N78UseXatjVS7p">
+      <button class="modal-close" id="modalClose" aria-label="关闭" data-page-node-id="cXlDTyXysHLzDl2Ai2v9aW">✕</button>
+    </div>
+    <div class="modal-body" data-page-node-id="DXFEftKObZkntHq1tWHtFj">
+      <span class="cat" id="modalCat" data-page-node-id="4hERNIw01OnnupixlR9QcE"></span>
+      <h2 id="modalTitle" data-page-node-id="jH4rpnoBbN4FHW0Ni3HbKI"></h2>
+      <div class="prose" id="modalProse" data-page-node-id="UrPCVvmG6PuE3Qts59mFdB"></div>
+      <div class="tags" id="modalTags" data-page-node-id="Q15VhOIuoKPKVmnxwN2ZaV"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 云服务配置（来自 publicConfig，可安全放在前端） -->
 <script>
-const SHOTS=[
- {t:0,   n:"01", c:"绿野尽头,城堡与标题",   cap:"经典童话 | 绿野仙踪"},
- {t:4,   n:"02", c:"龙卷风卷走整座木屋",     cap:"一场意外,开启冒险"},
- {t:8.5, n:"03", c:"落地:草屋、彩虹与花田",   cap:"一场意外,开启冒险"},
- {t:13,  n:"04", c:"麦田里遇见稻草人",       cap:"四个心怀遗憾的追梦人"},
- {t:17.5,n:"05", c:"林中遇铁皮人,心口一颗红心",cap:"四个心怀遗憾的追梦人"},
- {t:22,  n:"06", c:"狮子低头,四人了然",       cap:"结伴而行,彼此成就"},
- {t:26,  n:"07", c:"四人同行,背影走向远方",   cap:"结伴而行,彼此成就"},
- {t:30,  n:"08", c:"绿野尽头,翡翠般的城堡",   cap:"你想要的,一直都在自己身上"},
- {t:36,  n:"09", c:"城堡前并肩而立",         cap:"你想要的,一直都在自己身上"},
- {t:40.5,n:"10", c:"旅程缩回一本摊开的书",    cap:"最好的旅途,是遇见更好的自己"}
+  window.WORKBUDDY_PUBLIC_CONFIG = {
+    endpoint: "https://personal-blog-82444.app.workbuddy.host",
+    oauthRelayBaseUrl: "https://www.workbuddy.cn/v2/as/genie-baas/oauth",
+    publishableKey: "wbpk_5rltKZ0ZChZBX2leKwTPVa_ssWdDvCyTwT9OdO9uBFcgTXLWUM2FxSe"
+  };
+</script>
+<!-- 云 SDK（CDN，IIFE 全局 WorkBuddyCloud） -->
+<script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+<script>
+/* ==================== 作品数据 ====================
+   把下面数组替换成你自己的作品即可。
+   字段：title 标题 / category 分类 / tags 标签数组 / summary 简介 /
+        details 详情段落数组 / date 日期 / emoji 封面图标 / cover 封面渐变CSS */
+const WORKS = [
+  {
+    title:"苏超公共关系案例解析", category:"课程项目", tags:["公共关系","案例分析","传播"],
+    summary:"以江苏城市足球联赛为样本，梳理一次现象级传播背后的公关逻辑。",
+    details:[
+      "从 2025 年首届苏超爆火，到 2026 年第二届赛事的体系化运营，这个案例完整呈现了一场群众赛事如何变成全民话题。",
+      "我重点分析了传播机制、多方协同和官方与网友的双向互动，并把课本理论落到具体事件上，做成了一份可以课堂讲述的演示文稿。",
+      "数据部分逐条核对了来源，确保每个数字都有出处。"
+    ],
+    date:"2026.11", emoji:"⚽", cover:"linear-gradient(135deg,#d7efe3,#8ec9ae)"
+  },
+  {
+    title:"马卡龙风格 PPT 模板", category:"设计作品", tags:["PPT","版式设计","视觉"],
+    summary:"一套柔和配色的可爱风演示模板，圆角卡片与卡通元素搭配。",
+    details:[
+      "为了让课堂展示更亲切，我设计了一套奶油底色、马卡龙配色的模板。",
+      "统一的圆角贴纸卡片、柔和的卡通装饰和清晰的中文字体，让内容既活泼又不失可读性。"
+    ],
+    date:"2026.10", emoji:"🎨", cover:"linear-gradient(135deg,#fce8ef,#f6c9d9)"
+  },
+  {
+    title:"个人作品集博客", category:"技术实践", tags:["网页","前端","作品集"],
+    summary:"也就是你现在看到的这个网站，从零搭建的个人展示空间。",
+    details:[
+      "用原生 HTML、CSS 和 JavaScript 搭建，没有依赖复杂的框架。",
+      "包含作品搜索、分类筛选、详情弹窗，以及一个真正保存到云端的留言板。",
+      "响应式布局让它在手机和电脑上都能好好显示。"
+    ],
+    date:"2026.11", emoji:"💻", cover:"linear-gradient(135deg,#dfe9f7,#a8c4e8)"
+  },
+  {
+    title:"《公共关系学》读书笔记", category:"读书笔记", tags:["阅读","理论","笔记"],
+    summary:"把课本里抽象的传播理论，整理成能联系现实的思维导图。",
+    details:[
+      "读完《公共关系学》后，我把几个核心理论模型重新梳理了一遍。",
+      "尝试用生活里的真实案例去解释每个概念，让死记硬背变成真正的理解。"
+    ],
+    date:"2026.09", emoji:"📚", cover:"linear-gradient(135deg,#fdf0d5,#f3d79a)"
+  },
+  {
+    title:"校园活动策划方案", category:"课程项目", tags:["策划","活动","文案"],
+    summary:"一份完整的校园主题活动方案，从创意到执行细节。",
+    details:[
+      "包括活动背景、目标人群、流程设计、宣传语和预算安排。",
+      "最大的收获是学会了把一个模糊的想法，拆成别人能照着执行的具体步骤。"
+    ],
+    date:"2026.06", emoji:"📋", cover:"linear-gradient(135deg,#e6e0f8,#c3b3ea)"
+  },
+  {
+    title:"数据可视化小练习", category:"技术实践", tags:["数据","图表","可视化"],
+    summary:"把一组杂乱的数据整理成一眼就能看懂的图表。",
+    details:[
+      "从数据清洗到图表选择，练习如何让数字自己讲故事。",
+      "重点是搞清楚什么场景该用什么图，而不是一味追求好看。"
+    ],
+    date:"2026.05", emoji:"📊", cover:"linear-gradient(135deg,#d8f0ea,#95d2c4)"
+  }
 ];
 
-const v=document.getElementById('v');
-const bar=document.getElementById('bar'),fill=document.getElementById('fill'),dot=document.getElementById('dot');
-const cur=document.getElementById('cur'),play=document.getElementById('play'),pico=document.getElementById('pico');
-const capEl=document.getElementById('cap');
-const ICO='<path d="M8 5v14l11-7z"/>';
-const ICO2='<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
-const DUR=45;
+/* ==================== 作品区逻辑 =================== */
+const grid = document.getElementById('worksGrid');
+const filters = document.getElementById('filters');
+const searchInput = document.getElementById('searchInput');
+let activeCat = '全部';
+const categories = ['全部', ...new Set(WORKS.map(w => w.category))];
 
-function fmt(s){const m=Math.floor(s/60);return m+':'+String(Math.floor(s%60)).padStart(2,'0')}
-function seekFrom(e){
-  const r=bar.getBoundingClientRect();
-  const p=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));
-  v.currentTime=p*DUR;
-}
-bar.addEventListener('click',seekFrom);
-let drag=false;
-bar.addEventListener('mousedown',e=>{drag=true;seekFrom(e)});
-document.addEventListener('mousemove',e=>{if(drag)seekFrom(e)});
-document.addEventListener('mouseup',()=>drag=false);
-
-play.addEventListener('click',()=>{
-  if(v.paused){v.play();pico.innerHTML=ICO2}else{v.pause();pico.innerHTML=ICO}
-});
-v.addEventListener('play',()=>pico.innerHTML=ICO2);
-v.addEventListener('pause',()=>pico.innerHTML=ICO);
-v.addEventListener('click',()=>{v.paused?v.play():v.pause()});
-document.getElementById('mute').addEventListener('click',function(){
-  v.muted=!v.muted;this.textContent=v.muted?'🔇 静音':'🔊 声音';
-});
-document.getElementById('loop').addEventListener('click',function(){
-  v.loop=!v.loop;this.style.background=v.loop?'rgba(201,162,39,.22)':'';
-});
-document.getElementById('fs').addEventListener('click',()=>{
-  const box=document.querySelector('.player-box');
-  if(document.fullscreenElement)document.exitFullscreen();
-  else if(box.requestFullscreen)box.requestFullscreen();
-});
-
-/* build shot rail */
-const rail=document.getElementById('rail');
-SHOTS.forEach(s=>{
-  const d=document.createElement('div');
-  d.className='shot';d.dataset.t=s.t;
-  d.innerHTML=`<img src="assets/shot_${s.n}.jpg" alt=""><div class="n">${s.n}</div>
-    <div class="cap"><div class="t">${s.t.toFixed(1)}s</div>${s.c}</div>`;
-  d.onclick=()=>{v.currentTime=s.t;v.play();scrollTo({top:document.getElementById('watch').offsetTop-70,behavior:'smooth'})};
-  rail.appendChild(d);
-});
-const shotEls=[...rail.children];
-
-function sync(){
-  const t=v.currentTime||0;
-  const p=Math.min(1,t/DUR);
-  fill.style.width=(p*100)+'%';dot.style.left=(p*100)+'%';
-  cur.textContent=fmt(t);
-  let active=-1;
-  for(let i=0;i<SHOTS.length;i++){if(t>=SHOTS[i].t)active=i}
-  shotEls.forEach((e,i)=>e.classList.toggle('act',i===active));
-  let txt='';
-  if(t<3)txt='经典童话 | 绿野仙踪';
-  else if(t<12.5)txt='一场意外,开启冒险';
-  else if(t<21)txt='四个心怀遗憾的追梦人';
-  else if(t<29)txt='结伴而行,彼此成就';
-  else if(t<40)txt='你想要的,一直都在自己身上';
-  else txt='最好的旅途,是遇见更好的自己';
-  capEl.textContent=txt;
-}
-v.addEventListener('timeupdate',sync);
-v.addEventListener('loadedmetadata',sync);
-sync();
-
-/* tabs */
-document.querySelectorAll('.tab').forEach(t=>{
-  t.onclick=()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    document.querySelector('.pane[data-p="'+t.dataset.t+'"]').classList.add('on');
-  };
-});
-
-/* character wish reveal */
-document.querySelectorAll('.ch').forEach(c=>{
-  c.onclick=()=>{
-    if(c.dataset.open)return;
-    c.dataset.open=1;
-    const w=document.createElement('div');
-    w.style.cssText='font-size:13.5px;color:#7a6b57;margin-top:10px;line-height:1.85;border-top:1px dashed rgba(61,50,38,.16);padding-top:10px;animation:fade .4s ease';
-    w.innerHTML=c.dataset.w;
-    c.querySelector('.info').appendChild(w);
-  };
-});
-
-/* quiz */
-const QUIZ=[
- {q:"片头把多姆和她的木屋一起卷走的,是下面哪一样东西?",o:["龙卷风","巨浪","大雪","外星人飞船"],a:0,
-  e:"龙卷风。原著里多姆是被风带走的,改写版让整座木屋升空,视觉冲击更强,转场也天然成立。"},
- {q:"三位同伴里,谁的心口画着一颗红色的心?",o:["稻草人","铁皮人","狮子"],a:1,
-  e:"铁皮人。他握着斧头看似凶悍,但他想要的只是一颗能学会在乎别人的心。"},
- {q:"全片的最后一个镜头,四人走进了什么里面?",o:["城堡的大门","一本摊开的书","一片花海","一条河"],a:1,
-  e:"一本摊开的书。金色烟云把四人收进书页,与首帧的城堡呼应——故事讲完了,书还没合上。"}
-];
-let qi=0,ans=0,locked=false,done=false;
-const qh=document.getElementById('qh'),opts=document.getElementById('opts'),
-      fb=document.getElementById('fb'),next=document.getElementById('next'),
-      sc=document.getElementById('score');
-const KEYS=['A','B','C','D'];
-function render(){
-  const Q=QUIZ[qi];
-  qh.textContent=(qi+1)+'. '+Q.q;
-  opts.innerHTML='';locked=false;
-  fb.textContent='';fb.className='fb';
-  Q.o.forEach((txt,i)=>{
-    const b=document.createElement('button');
-    b.className='opt';b.innerHTML=`<span class="k">${KEYS[i]}</span>${txt}`;
-    b.onclick=()=>{
-      if(locked)return;locked=true;
-      [...opts.children].forEach(x=>x.disabled=true);
-      if(i===Q.a){b.classList.add('right');fb.textContent='✓ '+Q.e;fb.className='fb ok';ans++}
-      else{b.classList.add('wrong');opts.children[Q.a].classList.add('right');
-        fb.textContent='✗ 正确答案：'+KEYS[Q.a]+'。'+Q.e;fb.className='fb no'}
-      next.textContent=(qi===QUIZ.length-1)?'查看结果 ✓':'下一题 →';
-      sc.textContent='已答 '+qi+'/3 · 答对 '+ans+' 题';
-    };
-    opts.appendChild(b);
+function renderFilters(){
+  filters.innerHTML = categories.map(c =>
+    `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  filters.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      activeCat = btn.dataset.cat;
+      renderFilters();
+      renderWorks();
+    });
   });
-  next.textContent=(qi===QUIZ.length-1)?'查看结果 ✓':'下一题 →';
-  sc.textContent='已答 '+qi+'/3 · 答对 '+ans+' 题';
 }
-next.onclick=()=>{
-  if(done){ // restart
-    qi=0;ans=0;done=false;
-    qh.textContent='';render();
+
+function renderWorks(){
+  const q = searchInput.value.trim().toLowerCase();
+  const list = WORKS.filter(w=>{
+    const inCat = activeCat==='全部' || w.category===activeCat;
+    const hay = [w.title,w.category,w.summary,...w.tags].join(' ').toLowerCase();
+    return inCat && (!q || hay.includes(q));
+  });
+  if(!list.length){
+    grid.innerHTML = `<div class="empty"><span class="face">🔎</span>没有找到匹配的作品，换个关键词试试吧。</div>`;
     return;
   }
-  if(!locked){fb.textContent='先选一个答案吧~';fb.className='fb';return}
-  if(qi<QUIZ.length-1){qi++;render();return}
-  // finish
-  done=true;
-  const m=['再刷一遍吧,这个知识点很值得拿分。',
-          '差一点点,回去把分镜点一遍就全会了。',
-          '不错!你已经看懂这部短片的结构了。',
-          '满分!你可以当自己的片头解说员了。'];
-  qh.textContent=ans===3?'全部答对,太棒了!':'测验结束';
-  opts.innerHTML='';
-  fb.textContent=m[ans];fb.className=ans===3?'fb ok':'fb no';
-  next.textContent='↻ 再来一次';
-  sc.textContent='最终得分 '+ans+' / 3';
-};
-render();
+  grid.innerHTML = list.map((w,i)=>`
+    <article class="card" data-idx="${WORKS.indexOf(w)}">
+      <div class="cover" style="background:${w.cover}">${w.emoji}</div>
+      <div class="card-body">
+        <div class="card-top"><span class="cat">${w.category}</span><span class="date">${w.date}</span></div>
+        <h3>${w.title}</h3>
+        <p>${w.summary}</p>
+        <div class="tags">${w.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click',()=>openModal(WORKS[card.dataset.idx]));
+  });
+}
 
-/* dandelion seeds on click */
-document.addEventListener('click',e=>{
-  for(let i=0;i<5;i++){
-    const s=document.createElement('div');
-    s.className='seed';s.textContent='✽';
-    s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
-    s.style.setProperty('--dx',(Math.random()*180-90)+'px');
-    s.style.setProperty('--dy',(Math.random()*-170-60)+'px');
-    s.style.animationDelay=(i*90)+'ms';
-    s.style.fontSize=(11+Math.random()*9)+'px';
-    s.style.color='rgba(201,162,39,.75)';
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),5600);
+/* ==================== 详情弹窗 ==================== */
+const overlay = document.getElementById('overlay');
+function openModal(w){
+  document.getElementById('modalCover').style.background = w.cover;
+  // modal-close 按钮是覆盖层的子元素，设置背景不会移除它
+  document.getElementById('modalCat').textContent = w.category + ' · ' + w.date;
+  document.getElementById('modalTitle').textContent = w.title;
+  document.getElementById('modalProse').innerHTML = w.details.map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('modalTags').innerHTML = w.tags.map(t=>`<span class="tag">#${t}</span>`).join('');
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  overlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ==================== 留言板（云数据库） ==================== */
+let cloud = null;
+let dbReady = false;
+
+function initCloud(){
+  try{
+    if(typeof WorkBuddyCloud === 'undefined') throw new Error('SDK 未加载');
+    const cfg = window.WORKBUDDY_PUBLIC_CONFIG;
+    cloud = WorkBuddyCloud.createWorkBuddyCloud({
+      endpoint: cfg.endpoint,
+      oauthRelayBaseUrl: cfg.oauthRelayBaseUrl,
+      publishableKey: cfg.publishableKey
+    });
+    dbReady = true;
+  }catch(err){
+    console.warn('云服务初始化失败:', err && err.message);
+    dbReady = false;
   }
+}
+
+function timeStr(iso){
+  try{
+    const d = new Date(iso);
+    return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+
+      ' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  }catch(e){ return ''; }
+}
+function colorFor(name){
+  const palette = ['#5b9bd5','#7b8fd6','#6aa8d6','#8e9fe0','#4fa3b8','#5c9ec9'];
+  let h=0; for(const c of name) h=(h*31+c.charCodeAt(0))>>>0;
+  return palette[h % palette.length];
+}
+function esc(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+async function loadMessages(){
+  const list = document.getElementById('gbList');
+  if(!dbReady){
+    list.innerHTML = `<div class="gb-status">留言功能暂时不可用（云服务未连接），请稍后再试。</div>`;
+    return;
+  }
+  list.innerHTML = `<div class="gb-status">正在加载留言…</div>`;
+  const { data, error } = await cloud.database.from('guestbook')
+    .select('id, nickname, content, created_at')
+    .order('created_at', { ascending:false }).limit(100);
+  if(error){
+    list.innerHTML = `<div class="gb-status">留言加载失败：${esc(error.message||'请稍后重试')}</div>`;
+    return;
+  }
+  if(!data || !data.length){
+    list.innerHTML = `<div class="gb-status">还没有留言，来当第一个吧～ 🌱</div>`;
+    return;
+  }
+  list.innerHTML = data.map(m=>{
+    const name = m.nickname || '匿名访客';
+    return `<div class="msg">
+      <div class="msg-head">
+        <div class="msg-av" style="background:${colorFor(name)}">${esc(name.slice(0,1))}</div>
+        <span class="msg-name">${esc(name)}</span>
+        <span class="msg-time">${timeStr(m.created_at)}</span>
+      </div>
+      <div class="msg-body">${esc(m.content)}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('gbForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const name = document.getElementById('gbName').value.trim() || '匿名访客';
+  const content = document.getElementById('gbContent').value.trim();
+  const msg = document.getElementById('gbMsg');
+  const btn = document.getElementById('gbSubmit');
+  msg.className = 'form-msg';
+  if(!content){ msg.className='form-msg err'; msg.textContent='留言内容不能为空哦。'; return; }
+  if(!dbReady){ msg.className='form-msg err'; msg.textContent='留言功能暂时不可用，请稍后再试。'; return; }
+
+  btn.disabled = true; btn.textContent = '发布中…';
+  const { error } = await cloud.database.from('guestbook').insert({ nickname:name, content:content });
+  btn.disabled = false; btn.textContent = '发布留言';
+  if(error){
+    msg.className='form-msg err';
+    msg.textContent = '发布失败：' + (error.message || '请稍后重试');
+    return;
+  }
+  msg.className='form-msg ok';
+  msg.textContent = '发布成功！谢谢你的留言 🎉';
+  document.getElementById('gbContent').value = '';
+  await loadMessages();
 });
 
-/* scroll reveal + nav highlight */
-const io=new IntersectionObserver(es=>{
-  es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
-},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
-
-const secs=['watch','story','chars','craft','quiz'];
-const navA=[...document.querySelectorAll('.nav-links a')];
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY+120;let cur='watch';
-  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.offsetTop<=y)cur=id});
-  navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
-},{passive:true});
+/* ==================== 初始化 ==================== */
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('statWorks').textContent = WORKS.length;
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+renderFilters();
+renderWorks();
+initCloud();
+loadMessages();
 </script>
 </body>
 </html>
